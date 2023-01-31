@@ -24,7 +24,7 @@ function Layout({ children }: ILayoutProps) {
 
 const LayoutHeader = styled.header`
   background-color: #fff;
-  height: 60px;
+  height: 55px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,27 +35,30 @@ const LayoutHeader = styled.header`
 
   & > a {
     display: flex;
-    align-items: center;
     justify-content: center;
     height: 100%;
 
     & > svg {
-      --logo-height: 24px;
+      --logo-height: 16px;
+      
+      margin-top: 20px;
       height: var(--logo-height);
-      width: calc(var(--logo-height) * 125 / 17);
+      width: calc(var(--logo-height) * 125 / 16);
 
       & > image {
         height: var(--logo-height);
-        width: calc(var(--logo-height) * 125 / 17);
+        width: calc(var(--logo-height) * 125 / 16);
       }
     }
   }
 `;
 
 const LayoutMain = styled.main`
-    background-color: #fff;
-    width: 100%;
-    display: flex;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
 `;
 
 export default Layout;
