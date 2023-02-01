@@ -3,17 +3,16 @@ import CodeInput from './components/codeInput/CodeInput';
 
 interface ICodEnterProps {
     phone: string;
+    onCodeEntered: (code: string) => void;
 }
 
-function CodeEnter({ phone }: ICodEnterProps) {
-
+function CodeEnter({ phone, onCodeEntered }: ICodEnterProps) {
 
     return (
         <FormContainer>
             <header>What's the code?</header>
             <p>Enter the code sent to <b>{phone}</b></p>
-            <CodeInput onCodeEntered={() => {
-            }}/>
+            <CodeInput onCodeEntered={onCodeEntered}/>
             <button className="resend-button">Resend</button>
             <button className="next-button">Next</button>
         </FormContainer>
@@ -22,7 +21,6 @@ function CodeEnter({ phone }: ICodEnterProps) {
 
 const FormContainer = styled.div`
   margin-top: 106px;
-  width: 375px;
   padding: 0 15px;
 
   & > header {

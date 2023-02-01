@@ -55,7 +55,6 @@ function PhoneEnter({ onPhoneEntered }: IPhoneEnterProps) {
 const FormContainer = styled.div`
   display: block;
   margin-top: 136px;
-  width: 375px;
   padding: 0 15px;
 
   & > header {

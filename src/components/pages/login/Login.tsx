@@ -4,9 +4,14 @@ import CodeEnter from './components/codeEnter/CodeEnter';
 
 function Login() {
     const [phone, setPhone] = useState<string | undefined>();
+    const [code, setCode] = useState<string | undefined>();
 
     const handlePhoneEntered = (phone: string) => {
         setPhone(phone);
+    }
+
+    const handleCodeEntered = (code: string) => {
+        setCode(code);
     }
 
     return (
@@ -14,7 +19,7 @@ function Login() {
             {
                 !phone ?
                     <PhoneEnter onPhoneEntered={handlePhoneEntered}/> :
-                    <CodeEnter phone={phone}/>
+                    <CodeEnter phone={phone} onCodeEntered={handleCodeEntered}/>
             }
         </>
     );

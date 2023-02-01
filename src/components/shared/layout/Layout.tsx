@@ -40,7 +40,7 @@ const LayoutHeader = styled.header`
 
     & > svg {
       --logo-height: 16px;
-      
+
       margin-top: 20px;
       height: var(--logo-height);
       width: calc(var(--logo-height) * 125 / 16);
@@ -59,6 +59,10 @@ const LayoutMain = styled.main`
   display: flex;
   position: relative;
   justify-content: center;
+  
+  & > div:first-child {
+    width: 375px;
+  }
 `;
 
 export default Layout;
