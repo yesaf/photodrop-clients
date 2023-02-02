@@ -1,19 +1,27 @@
 import logo from '../../../assets/images/photodrop-logo.svg';
-import styled from 'styled-components';
+import { LayoutHeader, LayoutMain, HeaderButtonContainer } from './Layout.styles';
 
 interface ILayoutProps {
     children: React.ReactNode;
+    right?: React.ReactNode;
+    left?: React.ReactNode;
 }
 
-function Layout({ children }: ILayoutProps) {
+function Layout({ children, left, right }: ILayoutProps) {
     return (
         <>
             <LayoutHeader>
+                <HeaderButtonContainer className="left" isShown={!!left}>
+                    {left}
+                </HeaderButtonContainer>
                 <a href="/auth">
-                    <svg xmlns="http://www.w3.org/2000/svg">
+                    <svg>
                         <image href={logo}/>
                     </svg>
                 </a>
+                <HeaderButtonContainer className="right" isShown={!!right}>
+                    {right}
+                </HeaderButtonContainer>
             </LayoutHeader>
             <LayoutMain>
                 {children}
@@ -22,47 +30,6 @@ function Layout({ children }: ILayoutProps) {
     );
 }
 
-const LayoutHeader = styled.header`
-  background-color: #fff;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  border-width: 0 0 1px 0;
-  border-style: solid;
-  border-color: #F1F0EC;
-
-  & > a {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-
-    & > svg {
-      --logo-height: 16px;
-
-      margin-top: 20px;
-      height: var(--logo-height);
-      width: calc(var(--logo-height) * 125 / 16);
-
-      & > image {
-        height: var(--logo-height);
-        width: calc(var(--logo-height) * 125 / 16);
-      }
-    }
-  }
-`;
-
-const LayoutMain = styled.main`
-  background-color: #fff;
-  width: 100%;
-  display: flex;
-  position: relative;
-  justify-content: center;
-  
-  & > div:first-child {
-    width: 375px;
-  }
-`;
 
 export default Layout;

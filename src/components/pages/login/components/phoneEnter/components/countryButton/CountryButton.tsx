@@ -11,25 +11,34 @@ interface ICustomSelectProps {
 function CountryButton({ value, onChange }: ICustomSelectProps) {
     const [showCountrySelect, setShowCountrySelect] = useState<boolean>(false);
 
+    const handleClose = () => {
+        setShowCountrySelect(false);
+    }
+
     const handleChooseCountry = (country: string) => {
         onChange(country);
         setShowCountrySelect(false);
     };
 
     return (
-        <Container onClick={() => setShowCountrySelect(!showCountrySelect)}>
-            <img
-                className="country-flag"
-                src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${value}.svg`}
-                alt={value}/>
-            <svg xmlns="http://www.w3.org/2000/svg">
-                <image href={arrowDown}/>
-            </svg>
+        <>
+            <Container onClick={() => {
+                setShowCountrySelect(true);
+            }}>
+                <img
+                    className="country-flag"
+                    src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${value}.svg`}
+                    alt={value}/>
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <image href={arrowDown}/>
+                </svg>
+            </Container>
             {
                 showCountrySelect &&
-                <CountrySelect onCountryClick={handleChooseCountry}/>
+                <CountrySelect onCountryClick={handleChooseCountry} onClose={handleClose}/>
             }
-        </Container>
+        </>
+
     );
 }
 
