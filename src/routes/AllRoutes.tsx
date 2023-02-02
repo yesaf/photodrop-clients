@@ -7,6 +7,7 @@ import AccountButton from '../components/shared/accountButton/AccountButton';
 import Login from '../components/pages/login/Login';
 import Avatar from '../components/pages/avatar/Avatar';
 import Home from '../components/pages/home/Home';
+import Account from '../components/pages/account/Account';
 
 function AllRoutes() {
     return (
@@ -22,6 +23,7 @@ function AllRoutes() {
                 </Layout>
             } />
             <Route path="/avatar" element={<Layout><Avatar/></Layout>}/>
+            <Route path="/me" element={<Layout><Account/></Layout>}/>
         </Routes>
     );
 }
