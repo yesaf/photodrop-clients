@@ -1,15 +1,20 @@
 import styled from 'styled-components';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 interface ICodeInputProps {
     onCodeEntered: (code: string) => void;
+    onCodeChanged: (code: string) => void;
 }
 
-function CodeInput({ onCodeEntered }: ICodeInputProps) {
+function CodeInput({ onCodeEntered, onCodeChanged }: ICodeInputProps) {
     const [code, setCode] = useState<string>('');
     const getCodePart = (index: number) => {
         return code[index] || '';
     };
+
+    useEffect(() => {
+        onCodeChanged(code);
+    }, [code, onCodeChanged]);
 
     const handleCodeChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import CodeInput from './components/codeInput/CodeInput';
+import { useCallback, useState } from 'react';
 
 interface ICodEnterProps {
     phone: string;
@@ -7,14 +8,18 @@ interface ICodEnterProps {
 }
 
 function CodeEnter({ phone, onCodeEntered }: ICodEnterProps) {
+    const [disableButton, setDisableButton] = useState(true);
+    const handleCodeChanged = useCallback((code: string) => {
+        setDisableButton(code.length !== 6);
+    }, []);
 
     return (
         <FormContainer>
             <header>What's the code?</header>
             <p>Enter the code sent to <b>{phone}</b></p>
-            <CodeInput onCodeEntered={onCodeEntered}/>
+            <CodeInput onCodeEntered={onCodeEntered} onCodeChanged={handleCodeChanged}/>
             <button className="resend-button">Resend</button>
-            <button className="next-button">Next</button>
+            <button className="next-button" disabled={disableButton}>Next</button>
         </FormContainer>
     );
 }
@@ -92,6 +97,9 @@ const FormContainer = styled.div`
 
     color: #FFFFFF;
     
+    &:disabled {
+      opacity: 0.33;
+    }
   }
 `;
 
