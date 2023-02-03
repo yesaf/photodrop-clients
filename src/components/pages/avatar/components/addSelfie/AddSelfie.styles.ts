@@ -8,10 +8,7 @@ export const SelfieContainer = styled.div`
   margin-top: 72px;
   position: relative;
 
-  & > header {
-    font-family: termina, sans-serif;
-    font-style: normal;
-    font-weight: 700;
+  & > h2 {
     font-size: 22px;
     line-height: 26px;
     display: flex;

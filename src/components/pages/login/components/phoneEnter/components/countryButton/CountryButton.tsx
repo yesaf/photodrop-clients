@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import arrowDown from '../../../../../../../assets/images/icons/arrow-down.svg';
+import arrowDown from '@/assets/images/icons/arrow-down.svg';
 import styled from 'styled-components';
 import CountrySelect from '../countrySelect/CountrySelect';
 

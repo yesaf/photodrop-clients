@@ -20,7 +20,7 @@ function PhoneEnter({ onPhoneEntered }: IPhoneEnterProps) {
 
     return (
         <FormContainer>
-            <header>Let's get started</header>
+            <h2>Let's get started</h2>
             <span className="enter-phone-text">Enter your phone number</span>
             <PhoneInput
                 international
@@ -57,11 +57,9 @@ const FormContainer = styled.div`
   margin-top: 136px;
   padding: 0 15px;
 
-  & > header {
+  & > h2 {
     -webkit-font-smoothing: antialiased;
     margin: 0 auto 14px;
-    font-family: termina, sans-serif;
-    font-weight: 700;
     font-size: 22px;
     line-height: 17px;
     text-align: center;

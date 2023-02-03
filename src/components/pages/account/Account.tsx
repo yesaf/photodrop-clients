@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import defaultAvatar from '../../../assets/images/default-avatar.svg';
-import editIcon from '../../../assets/images/icons/edit-selfie.svg';
-import arrowRight from '../../../assets/images/icons/arrow-right.svg';
+import defaultAvatar from '@/assets/images/default-avatar.svg';
+import editIcon from '@/assets/images/icons/edit-selfie.svg';
+import arrowRight from '@/assets/images/icons/arrow-right.svg';
 
 function Account() {
-
     const user = {
         name: 'John Doe',
         phone: '+380 67 123 45 67',

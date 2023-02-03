@@ -7,3 +7,10 @@ body {
     font-family: 'Futura PT', sans-serif;
     color: #262626;
 }
+
+h2 {
+    font-family: termina, sans-serif;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+}

@@ -1,6 +1,6 @@
 import Cropper, { Area } from 'react-easy-crop';
 import { useState, useCallback, useEffect } from 'react';
-import closeIcon from '../../../assets/images/icons/close.svg';
+import closeIcon from '@/assets/images/icons/close.svg';
 import { Container, ActionsContainer, CropContainer, CropHeader } from './CropImage.styles';
 
 interface CropImageProps {

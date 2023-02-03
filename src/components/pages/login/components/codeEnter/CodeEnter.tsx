@@ -15,7 +15,7 @@ function CodeEnter({ phone, onCodeEntered }: ICodEnterProps) {
 
     return (
         <FormContainer>
-            <header>What's the code?</header>
+            <h2>What's the code?</h2>
             <p>Enter the code sent to <b>{phone}</b></p>
             <CodeInput onCodeEntered={onCodeEntered} onCodeChanged={handleCodeChanged}/>
             <button className="resend-button">Resend</button>
@@ -28,13 +28,10 @@ const FormContainer = styled.div`
   margin-top: 106px;
   padding: 0 15px;
 
-  & > header {
+  & > h2 {
     width: 345px;
     height: 17px;
 
-    font-family: termina, sans-serif;
-    font-style: normal;
-    font-weight: 700;
     font-size: 22px;
     line-height: 26px;
     text-align: center;
@@ -49,6 +46,8 @@ const FormContainer = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 21px;
+    margin-top: 14px;
+    margin-bottom: 19px;
 
     /* Black - #262626 */
 
