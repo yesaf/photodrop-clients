@@ -37,8 +37,8 @@ function Albums({ albums }: IAlbumsProps) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 15px;
-  width: 100%;
+  padding: 0 0 0 15px;
+  width: 375px;
 
   & > header {
     margin-top: 15px;
@@ -51,7 +51,7 @@ const Container = styled.div`
   }
   
   & > .albums-container {
-    width: 345px;
+    width: 100%;
     
     display: flex;
     flex-direction: row;
