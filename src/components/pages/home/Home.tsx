@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import NoAlbums from './components/noAlbums/NoAlbums';
+import WithAlbums from './components/withAlbums/WithAlbums';
+import data, { IAlbum } from '@/api/tmp/data';
 
 function Home() {
-    const [albums, setAlbums] = useState<any[] | undefined>();
+    const [albums, setAlbums] = useState<IAlbum[] | undefined>(data);
 
     return (
         <div className="home">
             {
                 albums && albums.length > 0 ?
-                    'Albums' :
+                    <WithAlbums albums={albums}/> :
                     <NoAlbums/>
             }
         </div>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import arrowBack from '../../../assets/images/icons/arrow-left.svg';
+import arrowBack from '@/assets/images/icons/arrow-left.svg';
 import { useCallback } from 'react';
 
 interface IBackButtonProps {
@@ -36,5 +36,9 @@ const BackLink = styled(Link)`
     }
   }
 `;
+
+BackButton.defaultProps = {
+    refresh: false
+}
 
 export default BackButton;

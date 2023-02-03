@@ -17,15 +17,23 @@ function Routes() {
                 <Layout right={<AccountButton/>}>
                     <Home/>
                 </Layout>
-            } />
+            }/>
             <Route path="/auth" element={
                 <Layout left={<BackButton to="/auth" refresh/>}>
                     <Login/>
                 </Layout>
-            } />
+            }/>
             <Route path="/avatar" element={<Layout><Avatar/></Layout>}/>
-            <Route path="/me" element={<Layout><Account/></Layout>}/>
-            <Route path="/name" element={<Layout><ChangeName/></Layout>}/>
+            <Route path="/me" element={
+                <Layout left={<BackButton to="/"/>}>
+                    <Account/>
+                </Layout>
+            }/>
+            <Route path="/name" element={
+                <Layout left={<BackButton to="/me"/>}>
+                    <ChangeName/>
+                </Layout>
+            }/>
         </ReactRoutes>
     );
 }

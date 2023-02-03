@@ -1,4 +1,24 @@
-const albums = [
+export interface IPhoto {
+    photoId: string;
+    unlockedPhotoUrl: string;
+    lockedPhotoUrl: string;
+    unlockedThumbnailUrl: string;
+    lockedThumbnailUrl: string;
+    createdAt: string;
+    albumId: string;
+    clients: string;
+}
+
+export interface IAlbum {
+    albumId: string;
+    name: string;
+    location: string;
+    createdAt: string;
+    userId: string;
+    photos: IPhoto[];
+}
+
+const albums: IAlbum[] = [
     {
         "albumId": "59bef749-ad17-4363-b682-36e4ca048144",
         "name": "test",
@@ -40,4 +60,10 @@ const albums = [
     }
 ];
 
-export default albums;
+let albumsExtended: IAlbum[] = [];
+
+for (let i = 0; i < 10; i++) {
+    albumsExtended.push(...albums);
+}
+
+export default albumsExtended;

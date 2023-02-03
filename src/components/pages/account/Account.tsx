@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import defaultAvatar from '@/assets/images/default-avatar.svg';
 import editIcon from '@/assets/images/icons/edit-selfie.svg';
 import arrowRight from '@/assets/images/icons/arrow-right.svg';
+import { Link } from 'react-router-dom';
 
 function Account() {
     const user = {
@@ -23,7 +24,7 @@ function Account() {
                 </EditButton>
             </SelfieContainer>
             <div className="actions-container">
-                <ActionButton>
+                <ActionButton to="/name">
                     <div className="text">
                         <span className="title">
                             Your name
@@ -119,11 +120,12 @@ const EditButton = styled.button`
   }
 `;
 
-const ActionButton = styled.button`
+const ActionButton = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  
   width: 345px;
   height: 50px;
 
@@ -133,6 +135,8 @@ const ActionButton = styled.button`
   border: 1px solid #CECCB5;
   border-radius: 10px;
 
+  text-decoration: none;
+  
   padding: 10px 16px 9px 15px;
   
   &:hover {
