@@ -13,6 +13,10 @@ function AccountButton() {
 }
 
 const AccountLink = styled(Link)`
+  display: block;
+  width: 35px;
+  height: 35px;
+  
   & > svg {
     width: 35px;
     height: 35px;

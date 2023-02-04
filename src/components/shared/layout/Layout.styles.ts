@@ -33,12 +33,13 @@ export const LayoutHeader = styled.header`
   
   & > .left {
     left: 0;
-    padding: 15px 19.5px;
+    margin: 19.5px 15px;
+    
   }
 
   & > .right {
     right: 0;
-    padding: 10px 15px;
+    margin: 10px 15px;
   }
 `;
 
@@ -48,7 +49,7 @@ interface IHButtonProps {
 
 export const HeaderButtonContainer = styled.div.attrs<IHButtonProps>(({ isShown }) => ({
     style: {
-        display: isShown ? 'block' : 'none',
+        display: isShown ? 'flex' : 'none',
     },
 }))<IHButtonProps>`
   position: absolute;

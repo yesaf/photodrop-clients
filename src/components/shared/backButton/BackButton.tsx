@@ -26,6 +26,10 @@ function BackButton({ to, refresh }: IBackButtonProps) {
 }
 
 const BackLink = styled(Link)`
+  display: block;
+  width: 8px;
+  height: 16px;
+  
   & > svg {
     width: 8px;
     height: 16px;

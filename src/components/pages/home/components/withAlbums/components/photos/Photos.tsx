@@ -1,6 +1,7 @@
 import { IAlbum } from '@/api/tmp/data';
 import styled from 'styled-components';
 import { memo, useMemo } from 'react';
+import Photo from '@/components/shared/photo/Photo';
 
 interface IPhotosProps {
     albums: IAlbum[];
@@ -25,9 +26,8 @@ function Photos({ albums }: IPhotosProps) {
             <div className="photos-container">
                 {
                     photos.map((photo, index) => (
-                        <Photo key={index}>
-                            <img src={photo} alt=""/>
-                        </Photo>
+                        <Photo key={index} photoUrl={photo}
+                               width={125} height={125}/>
                     ))
                 }
             </div>
@@ -38,7 +38,7 @@ function Photos({ albums }: IPhotosProps) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 375px;
   margin-top: 40px;
 
   & > header {
@@ -54,22 +54,6 @@ const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
-    
-    width: 375px;
-  }
-`;
-
-const Photo = styled.div`
-  width: 125px;
-  height: 125px;
-  
-  display: flex;
-  justify-content: center;
-
-  overflow: hidden;
-
-  & > img {
-    height: 125px;
   }
 `;
 

@@ -9,6 +9,7 @@ import Avatar from '../components/pages/avatar/Avatar';
 import Home from '../components/pages/home/Home';
 import Account from '../components/pages/account/Account';
 import ChangeName from '../components/pages/changeName/ChangeName';
+import Album from '@/components/pages/album/Album';
 
 function Routes() {
     return (
@@ -34,6 +35,8 @@ function Routes() {
                     <ChangeName/>
                 </Layout>
             }/>
+
+            <Route path="/albums/:id" element={<Album/>}/>
         </ReactRoutes>
     );
 }

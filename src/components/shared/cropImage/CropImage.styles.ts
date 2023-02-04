@@ -92,7 +92,7 @@ export const ActionsContainer = styled.div`
   justify-content: space-between;
   padding: 0 15px;
   width: 375px;
-    margin-top: 57.75px;
+  margin-top: 57.75px;
 
   & > button {
     width: 170px;
@@ -109,11 +109,19 @@ export const ActionsContainer = styled.div`
       border: 1px solid #FFFFFF;
       background-color: transparent;
       color: #FFFFFF;
+
+      &:hover {
+        background-color: #1f1f1f;
+      }
     }
 
     &.save {
       background-color: #FFFFFF;
       color: #262626;
+
+      &:hover {
+        background-color: #e5e5e5;
+      }
     }
   }
 
