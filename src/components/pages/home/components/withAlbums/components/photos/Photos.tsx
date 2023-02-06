@@ -1,4 +1,4 @@
-import { IAlbum } from '@/api/tmp/data';
+import { IAlbum, IPhoto } from '@/api/tmp/data';
 import styled from 'styled-components';
 import { memo, useMemo } from 'react';
 import Photo from '@/components/shared/photo/Photo';
@@ -8,12 +8,12 @@ interface IPhotosProps {
 }
 
 function Photos({ albums }: IPhotosProps) {
-    const photos = useMemo(() => {
-        const photosArray: string[] = [];
+    const photos: IPhoto[] = useMemo(() => {
+        const photosArray: IPhoto[] = [];
 
         albums.forEach((album: IAlbum) => {
             album.photos.forEach((photo) => {
-                photosArray.push(photo.lockedThumbnailUrl);
+                photosArray.push(photo);
             });
         });
 
@@ -26,7 +26,7 @@ function Photos({ albums }: IPhotosProps) {
             <div className="photos-container">
                 {
                     photos.map((photo, index) => (
-                        <Photo key={index} photoUrl={photo}
+                        <Photo key={index} photo={photo}
                                width={125} height={125}/>
                     ))
                 }

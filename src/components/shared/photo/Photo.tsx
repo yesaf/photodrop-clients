@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
+import { IPhoto } from '@/api/tmp/data';
+
+import FullPhoto from './components/fullPhoto/FullPhoto';
 
 interface IImageStyle {
     height?: string;
@@ -7,17 +10,18 @@ interface IImageStyle {
 }
 
 interface IPhotoProps {
-    photoUrl: string;
+    photo: IPhoto;
     height: number;
     width: number;
 }
 
-function Photo({ photoUrl, height, width }: IPhotoProps) {
+function Photo({ photo, height, width }: IPhotoProps) {
     const [imageStyle, setImageStyle] = useState<IImageStyle | undefined>();
+    const [showFullImage, setShowFullImage] = useState(false);
 
     useEffect(() => {
         const image = new Image();
-        image.src = photoUrl;
+        image.src = photo.unlockedThumbnailUrl;
         image.onload = () => {
             const imageWidth = image.width;
             const imageHeight = image.height;
@@ -32,14 +36,34 @@ function Photo({ photoUrl, height, width }: IPhotoProps) {
 
             setImageStyle(imageStyle);
         };
-    }, [photoUrl]);
+    }, [photo]);
+
+    const handleImageClick = () => {
+        setShowFullImage(true);
+    };
+
+    const handleFullImageClose = () => {
+        setShowFullImage(false);
+    }
 
     return (
-        <PhotoContainer style={{ height: height + 'px', width: width + 'px' }}>
+        <>
+            <PhotoContainer onClick={handleImageClick}
+                            tabIndex={0}
+                            onKeyPress={(e) =>
+                                e.key === 'Enter' && handleImageClick()}
+                            style={{ height: height + 'px', width: width + 'px' }}>
+                {
+                    imageStyle && <img src={photo.unlockedThumbnailUrl} alt="photo" style={imageStyle}/>
+                }
+            </PhotoContainer>
+
             {
-                imageStyle && <img src={photoUrl} alt="photo" style={imageStyle}/>
+                showFullImage &&
+                <FullPhoto photoUrl={photo.unlockedPhotoUrl}
+                           onClose={handleFullImageClose}/>
             }
-        </PhotoContainer>
+        </>
     );
 }
 
@@ -47,6 +71,7 @@ const PhotoContainer = styled.div`
   display: flex;
   justify-content: center;
   overflow: hidden;
+  cursor: pointer;
 `;
 
-export default Photo;
+export default memo(Photo);

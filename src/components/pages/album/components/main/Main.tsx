@@ -22,7 +22,7 @@ function Main({ albumPhotos }: IAlbumProps) {
                 {
                     albumPhotos.map((photo: IPhoto, index) => (
                             <Photo key={index}
-                                   photoUrl={photo.unlockedThumbnailUrl}
+                                   photo={photo}
                                    width={125} height={125}/>
                         ),
                     )

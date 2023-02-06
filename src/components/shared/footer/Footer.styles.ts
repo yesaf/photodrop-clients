@@ -49,10 +49,9 @@ export const Container = styled.div`
     line-height: 23px;
 
     color: #FFFFFF;
-    
+
     &:hover {
-        // sligthly darker than the background
-        background: #1f1f1f;
+      opacity: 0.5;
     }
   }
 
@@ -81,7 +80,7 @@ export const Container = styled.div`
 
     letter-spacing: -0.02em;
   }
-  
+
   & > a {
     display: block;
 
@@ -91,9 +90,9 @@ export const Container = styled.div`
     text-decoration: none;
 
     color: #FFFFFF;
-    
+
     &:hover {
-        text-decoration: underline;
+      text-decoration: underline;
     }
   }
 
