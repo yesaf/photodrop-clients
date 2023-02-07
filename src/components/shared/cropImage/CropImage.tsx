@@ -1,7 +1,7 @@
 import Cropper, { Area } from 'react-easy-crop';
 import { useState, useCallback, useEffect } from 'react';
 import closeIcon from '@/assets/images/icons/close.svg';
-import { Container, ActionsContainer, CropContainer, CropHeader } from './CropImage.styles';
+import { Background, Container, ActionsContainer, CropContainer, CropHeader } from './CropImage.styles';
 
 interface CropImageProps {
     initialImage: string;
@@ -46,8 +46,7 @@ function CropImage({ initialImage, onDone, onDiscard }: CropImageProps) {
     }, [setCroppedArea]);
 
     return (
-        <>
-            <span/>
+        <Background>
             <Container>
                 <CropHeader>
                     <button onClick={onDiscard} className="close">
@@ -89,8 +88,7 @@ function CropImage({ initialImage, onDone, onDiscard }: CropImageProps) {
                     <button className="save" onClick={() => onDone(croppedArea!, initialImage)}>Done</button>
                 </ActionsContainer>
             </Container>
-        </>
-
+        </Background>
     );
 }
 

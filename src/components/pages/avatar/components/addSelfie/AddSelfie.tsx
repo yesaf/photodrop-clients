@@ -17,17 +17,20 @@ function AddSelfie({ onAddSelfie }: IAddSelfieProps) {
                 onAddSelfie(reader.result as string);
             };
         }
-    }
+    };
 
     return (
         <SelfieContainer>
             <h2>Add a selfie</h2>
             <p className="text-explain">A selfie allows your photos to be synced with your account.</p>
-            <img className="avatar-image" src={defaultAvatar} alt="Avatar"/>
-            <input id="file-input" type="file" accept="image/*" onChange={handleFileChange}/>
-            <AddButton onClick={() => {
-                document.getElementById('file-input')?.click();
-            }}/>
+            <div className="selfie-input-container">
+
+                <img className="avatar-image" src={defaultAvatar} alt="Avatar"/>
+                <input id="file-input" type="file" accept="image/*" onChange={handleFileChange}/>
+                <AddButton onClick={() => {
+                    document.getElementById('file-input')?.click();
+                }}/>
+            </div>
         </SelfieContainer>
     );
 }

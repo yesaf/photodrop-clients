@@ -1,15 +1,34 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Background = styled.div`
   position: fixed;
   width: 100vw;
   height: 100vh;
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  justify-content: center;
   top: 0;
   left: 0;
   background-color: #262626;
+
+  @media (min-width: 1440px) {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+`;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 375px;
+
+  @media (min-width: 1440px) {
+    width: 379px;
+    height: 653px;
+    background-color: #262626;
+    border-radius: 20px;
+    
+    margin-top: 97px;
+  }
 
   .explain {
     margin-top: 94px;
@@ -17,7 +36,7 @@ export const Container = styled.div`
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    line-height: 21px;
+    line-height: 11px;
     display: flex;
     align-items: center;
     text-align: center;
@@ -31,7 +50,10 @@ export const CropHeader = styled.header`
   position: relative;
   display: flex;
   justify-content: center;
-  margin-top: 15.5px;
+  
+  @media (min-width: 1440px) {
+    width: 379px;
+  }
 
   & > .close {
     position: absolute;
@@ -40,10 +62,15 @@ export const CropHeader = styled.header`
     width: 30px;
     height: 30px;
     
+    padding: 0;
+    
+    margin-top: 15.5px;
+    margin-left: 15px;
+
     background-color: transparent;
     border: none;
     border-radius: 50%;
-    
+
     cursor: pointer;
 
     display: flex;
@@ -66,13 +93,12 @@ export const CropHeader = styled.header`
   }
 
   & > span {
-    margin-top: 7.5px;
-    height: 13px;
+    margin-top: 23px;
 
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
-    line-height: 23px;
+    line-height: 13px;
     display: flex;
     align-items: center;
     text-align: center;
@@ -85,11 +111,15 @@ export const CropContainer = styled.div`
   position: relative;
   width: 285px;
   height: 285px;
-  margin-top: 32px;
+  margin-top: 42px;
+  overflow: hidden;
 
-
+  border-radius: 50%;
+  
   .reactEasyCrop_CropArea {
     color: #262626;
+    border: 1px solid #CECCB5;
+    border-radius: 50%;
   }
 `;
 

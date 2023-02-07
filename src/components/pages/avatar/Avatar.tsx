@@ -11,10 +11,10 @@ function Avatar() {
 
     return (
         <>
+            <AddSelfie onAddSelfie={handleAddSelfie}/>
             {
-                selfie ?
-                    <CropImage initialImage={selfie} onDone={() => {}} onDiscard={() => {setSelfie(undefined)}} /> :
-                    <AddSelfie onAddSelfie={handleAddSelfie}/>
+                selfie &&
+                    <CropImage initialImage={selfie} onDone={() => {}} onDiscard={() => {setSelfie(undefined)}} />
             }
         </>
     );

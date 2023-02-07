@@ -7,15 +7,25 @@ export const SelfieContainer = styled.div`
   align-items: center;
   margin-top: 72px;
   position: relative;
+  
+  @media (min-width: 1440px) {
+    margin-top: 178px;
+
+  }
 
   & > h2 {
     font-size: 22px;
-    line-height: 26px;
+    line-height: 17px;
     display: flex;
     align-items: center;
     text-align: center;
 
     color: #262626;
+    
+    @media (min-width: 1440px) {
+      font-size: 30px;
+      line-height: 22px;
+    }
   }
 
   & > .text-explain {
@@ -28,21 +38,39 @@ export const SelfieContainer = styled.div`
     display: flex;
     align-items: center;
     text-align: center;
-
+    
+    width: 345px;
 
     color: #262626;
+    
+    @media (min-width: 1440px) {
+      margin: 29px 0 0 0;
+      font-size: 18px;
+      line-height: 16px;
+
+      width: 420px;
+    }
   }
 
   & > .avatar-image {
-    margin: 30px 0 0 0;
-    width: 181px;
-    height: 181px;
+    
     border: 1px solid #CECCB5;
     border-radius: 100px;
   }
 
-  & > #file-input {
-    display: none;
+  & > .selfie-input-container {
+    position: relative;
+    margin: 30px 0 0 0;
+    width: 181px;
+    height: 181px;
+    
+    & > #file-input {
+      display: none;
+    }
+    
+    @media (min-width: 1440px) {
+        margin: 28px 0 0 0;
+    }
   }
 `;
 
@@ -55,8 +83,8 @@ export const AddButton = styled.button`
   height: 42px;
   border-radius: 100px;
 
-  top: 257px;
-  right: 97px;
+  bottom: 0;
+    right: 0;
   background-color: black;
 
   &:before {
