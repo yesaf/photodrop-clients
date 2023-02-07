@@ -8,17 +8,25 @@ export const AccountContainer = styled.div`
   margin-top: 22px;
   padding: 0 15px;
 
+  @media screen and (min-width: 1440px) {
+    margin-top: 41px;
+  }
+
   & > header {
     font-family: termina, sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
-    line-height: 22px;
+    line-height: 12px;
     display: flex;
     align-items: center;
     text-align: center;
 
     color: #262626;
+
+    @media screen and (min-width: 1440px) {
+      font-size: 22px;
+    }
   }
 
   & > .actions-container {
@@ -33,14 +41,18 @@ export const SelfieContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  width: 100%;
+  width: 345px;
   margin-top: 20px;
+
+  @media screen and (min-width: 1440px) {
+    width: 420px;
+  }
 
   & > span {
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
-    line-height: 21px;
+    line-height: 14px;
     display: flex;
     align-items: center;
 
@@ -53,28 +65,42 @@ export const SelfieContainer = styled.div`
     border-radius: 50%;
     width: 100px;
     height: 100px;
+
+    @media screen and (min-width: 1440px) {
+      width: 150px;
+      height: 150px;
+    }
   }
-  
+
 `;
 
 export const EditButton = styled.button`
-  position: absolute;
-  width: 36.5px;
-  height: 36.5px;
-  top: 101px;
+  --size: 36.5px;
+  top: 91px;
   left: 81.25px;
+
+  @media screen and (min-width: 1440px) {
+    --size: 45px;
+    top: 133px;
+    left: 127px;
+  }
+
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+
   border: none;
   cursor: pointer;
   padding: 0;
-    background-color: transparent;
+  background-color: transparent;
 
   & > svg {
-    width: 100%;
-    height: 100%;
+    width: var(--size);
+    height: var(--size);
 
     & > image {
-      width: 36.5px;
-      height: 36.5px;
+      width: var(--size);
+      height: var(--size);
     }
   }
 `;
@@ -82,9 +108,8 @@ export const EditButton = styled.button`
 export const ActionButton = styled(Link)`
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
-  
+
   width: 345px;
   height: 50px;
 
@@ -95,9 +120,15 @@ export const ActionButton = styled(Link)`
   border-radius: 10px;
 
   text-decoration: none;
-  
-  padding: 10px 16px 9px 15px;
-  
+
+  padding: 10px 15px 0 15px;
+
+  @media screen and (min-width: 1440px) {
+    width: 420px;
+    height: 53px;
+    padding: 11px 16px 0 15px;
+  }
+
   &:hover {
     background: #F5F5F5;
   }
@@ -110,8 +141,12 @@ export const ActionButton = styled(Link)`
       text-align: start;
       font-style: normal;
       font-size: 14px;
-      line-height: 18px;
+      line-height: 10px;
       color: #262626;
+
+      @media screen and (min-width: 1440px) {
+        font-size: 16px;
+      }
     }
 
     & > .title {
@@ -119,17 +154,32 @@ export const ActionButton = styled(Link)`
     }
 
     & > .explanation {
+      margin-top: 10px;
       font-weight: 400;
+
+      @media screen and (min-width: 1440px) {
+        //margin-top: 8px;
+      }
     }
   }
 
   & > svg {
-    width: 8px;
-    height: 16px;
+    --size-width: 8px;
+    --size-height: 16px;
+    margin-top: 8px;
+
+    @media screen and (min-width: 1440px) {
+      --size-width: 10px;
+      --size-height: 20px;
+      margin-top: 6px;
+    }
+
+    width: var(--size-width);
+    height: var(--size-height);
 
     & > image {
-      width: 8px;
-      height: 16px;
+      width: var(--size-width);
+      height: var(--size-height);
     }
   }
 `;
