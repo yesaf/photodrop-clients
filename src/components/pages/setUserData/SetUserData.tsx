@@ -1,40 +1,34 @@
-import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useState } from 'react';
 
-function ChangeName() {
-    // const { user, setUser } = useUserContext();
-    const user = {
+function SetUserData() {
+    const [user, setUser] = useState({
         id: '12412',
-        name: 'Some Name',
-        // name: '',
-    };
-    const [name, setName] = useState(user.name);
-    const [isSaving, setIsSaving] = useState(false);
+        // name: 'Some Name',
+        name: '',
+    });
 
-    // const handleSave = async () => {
-    //     setIsSaving(true);
-    //     setError(null);
-    //     try {
-    //         const { data } = await axios.put('/api/user', { name });
-    //         setUser(data);
-    //     } catch (error) {
-    //         setError(error.message);
-    //     } finally {
-    //         setIsSaving(false);
-    //     }
-    // };
+    const [name, setName] = useState('');
+
+
+    if (user.name) {
+        return <Navigate to="/"/>
+    }
 
     return (
         <Container>
-            <h2>Your name</h2>
+            <h2>Let’s get to know you</h2>
             <input
                 type="text"
                 value={name}
+                placeholder="What’s your name?"
                 onChange={(e) => setName(e.target.value)}
             />
             <button onClick={() => {
-            }} disabled={isSaving}>
-                {isSaving ? 'Saving...' : 'Save'}
+                setUser({ ...user, name });
+            }} disabled={!name}>
+                See your photos!
             </button>
         </Container>
     );
@@ -96,7 +90,12 @@ const Container = styled.div`
       // dark on hover
       background: #2A00A6;
     }
+    
+    &:disabled {
+      opacity: 0.33;
+    }
   }
 `;
 
-export default ChangeName;
+
+export default SetUserData;

@@ -1,5 +1,6 @@
 import logo from '../../../assets/images/photodrop-logo.svg';
 import { LayoutHeader, LayoutMain, HeaderButtonContainer } from './Layout.styles';
+import { Link } from 'react-router-dom';
 
 interface ILayoutProps {
     children: React.ReactNode;
@@ -14,11 +15,11 @@ function Layout({ children, left, right }: ILayoutProps) {
                 <HeaderButtonContainer className="left" isShown={!!left}>
                     {left}
                 </HeaderButtonContainer>
-                <a href="/auth">
+                <Link to="/auth">
                     <svg>
                         <image href={logo}/>
                     </svg>
-                </a>
+                </Link>
                 <HeaderButtonContainer className="right" isShown={!!right}>
                     {right}
                 </HeaderButtonContainer>

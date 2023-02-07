@@ -47,7 +47,7 @@ const CustomHeader = styled.header`
     position: absolute;
     left: 0;
     top: 0;
-    margin: 19.5px 15px;
+    margin: 12.5px 4px;
   }
 `;
 

@@ -61,6 +61,7 @@ function Photo({ photo, height, width }: IPhotoProps) {
             {
                 showFullImage &&
                 <FullPhoto photoUrl={photo.unlockedPhotoUrl}
+                           isLocked={false}
                            onClose={handleFullImageClose}/>
             }
         </>

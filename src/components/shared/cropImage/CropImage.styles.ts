@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
-  top: -55px;
+  top: 0;
   left: 0;
   background-color: #262626;
 
@@ -33,20 +33,26 @@ export const CropHeader = styled.header`
   justify-content: center;
   margin-top: 15.5px;
 
-  & > button {
+  & > .close {
     position: absolute;
     left: 0;
     top: 0;
     width: 30px;
     height: 30px;
+    
     background-color: transparent;
     border: none;
+    border-radius: 50%;
+    
     cursor: pointer;
-    outline: none;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
 
     & > svg {
       width: 15px;
@@ -111,7 +117,7 @@ export const ActionsContainer = styled.div`
       color: #FFFFFF;
 
       &:hover {
-        background-color: #1f1f1f;
+        opacity: 0.5;
       }
     }
 
@@ -120,7 +126,8 @@ export const ActionsContainer = styled.div`
       color: #262626;
 
       &:hover {
-        background-color: #e5e5e5;
+        opacity: 0.5;
+
       }
     }
   }

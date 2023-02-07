@@ -5,15 +5,15 @@ import { useCallback } from 'react';
 
 interface IBackButtonProps {
     to: string;
+    onClick?: () => void;
     refresh?: boolean;
 }
 
-function BackButton({ to, refresh }: IBackButtonProps) {
+function BackButton({ to, onClick, refresh }: IBackButtonProps) {
 
     const handleClick = useCallback(() => {
-        if (refresh) {
-            window.location.reload();
-        }
+        onClick && onClick();
+        refresh && window.location.reload();
     }, []);
 
     return (
@@ -26,10 +26,14 @@ function BackButton({ to, refresh }: IBackButtonProps) {
 }
 
 const BackLink = styled(Link)`
-  display: block;
-  width: 8px;
-  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
   & > svg {
     width: 8px;
     height: 16px;
@@ -39,10 +43,15 @@ const BackLink = styled(Link)`
       height: 16px;
     }
   }
+  
+  &:hover {
+    background: #F0F0F0;
+    
+  }
 `;
 
 BackButton.defaultProps = {
-    refresh: false
-}
+    refresh: false,
+};
 
 export default BackButton;

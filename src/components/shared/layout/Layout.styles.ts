@@ -33,8 +33,7 @@ export const LayoutHeader = styled.header`
   
   & > .left {
     left: 0;
-    margin: 19.5px 15px;
-    
+    margin: 12.5px 8px;
   }
 
   & > .right {

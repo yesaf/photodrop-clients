@@ -41,6 +41,7 @@ function CropImage({ initialImage, onDone, onDiscard }: CropImageProps) {
     }, []);
 
     const onCropComplete = useCallback((croppedArea: Area) => {
+        console.log(croppedArea);
         setCroppedArea(croppedArea);
     }, [setCroppedArea]);
 
@@ -49,7 +50,7 @@ function CropImage({ initialImage, onDone, onDiscard }: CropImageProps) {
             <span/>
             <Container>
                 <CropHeader>
-                    <button onClick={onDiscard}>
+                    <button onClick={onDiscard} className="close">
                         <svg>
                             <image href={closeIcon}/>
                         </svg>

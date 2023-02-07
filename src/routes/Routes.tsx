@@ -10,6 +10,7 @@ import Home from '../components/pages/home/Home';
 import Account from '../components/pages/account/Account';
 import ChangeName from '../components/pages/changeName/ChangeName';
 import Album from '@/components/pages/album/Album';
+import SetUserData from '@/components/pages/setUserData/SetUserData';
 
 function Routes() {
     return (
@@ -20,7 +21,7 @@ function Routes() {
                 </Layout>
             }/>
             <Route path="/auth" element={
-                <Layout left={<BackButton to="/auth" refresh/>}>
+                <Layout>
                     <Login/>
                 </Layout>
             }/>
@@ -37,6 +38,9 @@ function Routes() {
             }/>
 
             <Route path="/albums/:id" element={<Album/>}/>
+
+            <Route path="/hello" element={<Layout><SetUserData/></Layout>}/>
+
         </ReactRoutes>
     );
 }
