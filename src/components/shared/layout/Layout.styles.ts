@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const LayoutHeader = styled.header`
   background-color: #fff;
@@ -12,25 +13,6 @@ export const LayoutHeader = styled.header`
   border-style: solid;
   border-color: #F1F0EC;
 
-  & > a {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-
-    & > svg {
-      --logo-height: 16px;
-
-      margin-top: 20px;
-      height: var(--logo-height);
-      width: calc(var(--logo-height) * 125 / 16);
-
-      & > image {
-        height: var(--logo-height);
-        width: calc(var(--logo-height) * 125 / 16);
-      }
-    }
-  }
-  
   & > .left {
     left: 0;
     margin: 12.5px 8px;
@@ -39,6 +21,36 @@ export const LayoutHeader = styled.header`
   & > .right {
     right: 0;
     margin: 10px 15px;
+  }
+
+  @media (min-width: 1440px) {
+    height: 60px
+  }
+`;
+
+export const HeaderLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  height: 100%;
+
+  & > svg {
+    --logo-height: 16px;
+    --logo-width: 125px;
+    margin-top: 20px;
+
+    @media (min-width: 1440px) {
+      --logo-height: 22px;
+      --logo-width: 179px;
+      margin-top: 19px;
+    }
+
+    height: var(--logo-height);
+    width: var(--logo-width);
+
+    & > image {
+      height: var(--logo-height);
+      width: var(--logo-width);
+    }
   }
 `;
 
@@ -64,5 +76,9 @@ export const LayoutMain = styled.main`
 
   & > div:first-child {
     width: 375px;
+
+    @media (min-width: 1440px) {
+      width: 1200px
+    }
   }
 `;

@@ -57,6 +57,11 @@ const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 19px;
+  width: 345px;
+  
+  @media (min-width: 1440px) {
+    width: 420px;
+  }
 
   & > input {
     width: 45px;
@@ -69,6 +74,9 @@ const InputContainer = styled.div`
 
     border: 1px solid #EEEEEE;
     border-radius: 10px;
+    
+    font-size: 20px;
+    line-height: 24px;
   }
 `;
 

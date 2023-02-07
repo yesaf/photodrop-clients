@@ -19,6 +19,10 @@ export const SelectContainer = styled.div`
   padding: 0;
 
   font-family: 'Halvetica', sans-serif;
+  
+  @media (min-width: 1440px) {
+    width: 600px;
+  }
 
   & > .search-container {
     display: flex;
@@ -33,6 +37,10 @@ export const SelectContainer = styled.div`
       padding: 5px 10px;
       outline: 1px solid #000;
       border: none;
+
+      @media (min-width: 1440px) {
+        font-size: 20px;
+      }
     }
   }
 `;
@@ -47,11 +55,19 @@ export const SelectHeader = styled.header`
   height: 30px;
   margin: 5px 0;
 
+  @media (min-width: 1440px) {
+    height: 40px;
+  }
+
   & > .title {
     font-size: 16px;
     line-height: 20px;
     font-weight: 550;
     color: #262626;
+    
+    @media (min-width: 1440px) {
+      font-size: 22px;
+    }
   }
 
   & > .close-button {
@@ -63,6 +79,10 @@ export const SelectHeader = styled.header`
     background-color: transparent;
     color: #262626;
     cursor: pointer;
+
+    @media (min-width: 1440px) {
+      font-size: 20px;
+    }
   }
 `;
 
@@ -81,6 +101,10 @@ export const CustomSelect = styled.ul`
     padding: 10px 15px;
     cursor: pointer;
     border-bottom: 1px solid #eee;
+    
+    @media (min-width: 1440px) {
+      font-size: 20px;
+    }
 
     & > .country-flag {
       width: 18px;

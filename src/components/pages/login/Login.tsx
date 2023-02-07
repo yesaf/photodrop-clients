@@ -25,10 +25,10 @@ function Login() {
                 !phone ?
                     <PhoneEnter onPhoneEntered={handlePhoneEntered}/> :
                     <>
+                        <CodeEnter phone={phone} onCodeEntered={handleCodeEntered}/>
                         <ReturnContainer>
                             <BackButton to="." onClick={() => setPhone(undefined)}/>
                         </ReturnContainer>
-                        <CodeEnter phone={phone} onCodeEntered={handleCodeEntered}/>
                     </>
             }
         </>
