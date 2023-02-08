@@ -1,20 +1,36 @@
-import { memo } from 'react';
-import { IPhoto } from '@/api/tmp/data';
-import styled from 'styled-components';
+import { memo, useCallback, useEffect, useState } from 'react';
 import Photo from '@/components/shared/photo/Photo';
+
+import { StyledMain } from './Main.styles';
+
+import { IPhoto } from '@/api/tmp/data';
 
 interface IAlbumProps {
     albumPhotos: IPhoto[];
 }
 
-// const calcPhotosHeight = (photosCount: number, photoHeight: number) => {
-//     const photosCountInRow = 3;
-//     const rowsCount = Math.ceil(photosCount / photosCountInRow);
-//
-//     return rowsCount * photoHeight;
-// };
-
 function Main({ albumPhotos }: IAlbumProps) {
+    const [sizes, setSizes] = useState({
+        width: 0,
+        height: 0,
+    });
+
+    const adaptSize = useCallback(() => {
+        const width = window.innerWidth;
+
+        width < 1440 ?
+            setSizes({ width: 125, height: 125 }) :
+            setSizes({ width: 400, height: 400 });
+    }, []);
+
+    useEffect(() => {
+        adaptSize();
+        window.addEventListener('resize', adaptSize);
+
+        return () => {
+            window.removeEventListener('resize', adaptSize);
+        };
+    }, []);
 
     return (
         <StyledMain>
@@ -23,7 +39,7 @@ function Main({ albumPhotos }: IAlbumProps) {
                     albumPhotos.map((photo: IPhoto, index) => (
                             <Photo key={index}
                                    photo={photo}
-                                   width={125} height={125}/>
+                                   {...sizes}/>
                         ),
                     )
                 }
@@ -35,40 +51,5 @@ function Main({ albumPhotos }: IAlbumProps) {
     );
 }
 
-const StyledMain = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  & > .photos-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    width: 375px;
-  }
-
-  & > .unlock-button {
-    margin: 40px 0;
-    width: 345px;
-    height: 50px;
-    cursor: pointer;
-
-    background: #3300CC;
-    border-radius: 50px;
-    border: none;
-
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 23px;
-
-    color: #FFFFFF;
-
-    &:hover {
-      background: #2A00A6;
-    }
-
-  }
-`;
 
 export default memo(Main);

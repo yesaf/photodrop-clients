@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { StyledFooter, Container } from './Footer.styles';
 
 function Footer() {
+    const isMobile = window.innerWidth < 1440;
+
     return (
         <StyledFooter>
             <Container>
@@ -16,12 +18,20 @@ function Footer() {
                     your experience, please consider using Frameology. It supports the photographers and makes PhotoDrop
                     possible.
                 </p>
-                <button className="frame-button">Frame a photo</button>
+                <button className="frame-button">{isMobile ? 'Frame a photo' : 'Order photo'}</button>
+                {
+                    !isMobile &&
+                    <p className="copyright">© 2022 FOM Online Inc</p>
+
+                }
                 <p className="contact">Questions? Get in touch - hello@photodrop.me</p>
                 <svg className="climate-logo">
                     <image href={climateNeutralLogo}/>
                 </svg>
-                <p className="copyright">© 2022 FOM Online Inc</p>
+                {
+                    isMobile &&
+                    <p className="copyright">© 2022 FOM Online Inc</p>
+                }
                 <Link to="/" className="terms">Terms</Link>
                 <Link to="/" className="privacy">Privacy Party</Link>
             </Container>

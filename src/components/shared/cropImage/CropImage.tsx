@@ -5,7 +5,7 @@ import { Background, Container, ActionsContainer, CropContainer, CropHeader } fr
 
 interface CropImageProps {
     initialImage: string;
-    onDone: (croppedArea: Area, croppedImage: string) => void;
+    onDone: (image: string, croppedArea: Area, zoom: string) => void;
     onDiscard: () => void;
 }
 
@@ -85,7 +85,7 @@ function CropImage({ initialImage, onDone, onDiscard }: CropImageProps) {
                     <input id="retake-input" type="file"
                            accept="image/*" onChange={handleSelfieChange}/>
                     <button className="retake" onClick={handleRetake}>Retake</button>
-                    <button className="save" onClick={() => onDone(croppedArea!, initialImage)}>Done</button>
+                    <button className="save" onClick={() => onDone(image, croppedArea!, `${zoom}`)}>Done</button>
                 </ActionsContainer>
             </Container>
         </Background>

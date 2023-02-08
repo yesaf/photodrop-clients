@@ -31,7 +31,7 @@ function Photos({ albums }: IPhotosProps) {
         width < 1440 ?
             setSizes({ width: 125, height: 125 }) :
             setSizes({ width: 400, height: 400 });
-    }, [window.innerWidth]);
+    }, []);
 
     useEffect(() => {
         adaptSize();
@@ -40,7 +40,7 @@ function Photos({ albums }: IPhotosProps) {
         return () => {
             window.removeEventListener('resize', adaptSize);
         };
-    }, [adaptSize]);
+    }, []);
 
     return (
         <Container>
@@ -49,7 +49,7 @@ function Photos({ albums }: IPhotosProps) {
                 {
                     photos.map((photo, index) => (
                         <Photo key={index} photo={photo}
-                               width={sizes.width} height={sizes.height}/>
+                               {...sizes}/>
                     ))
                 }
             </div>

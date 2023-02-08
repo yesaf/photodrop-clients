@@ -29,25 +29,34 @@ const BackLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   width: 30px;
   height: 30px;
   border-radius: 50%;
 
   & > svg {
-    width: 8px;
-    height: 16px;
+    --size-width: 8px;
+    --size-height: 16px;
+
+    @media screen and (min-width: 1440px) {
+      --size-width: 10px;
+      --size-height: 20px;
+    }
+
+    width: var(--size-width);
+    height: var(--size-height);
 
     image {
-      width: 8px;
-      height: 16px;
+      width: var(--size-width);
+      height: var(--size-height);
     }
   }
-  
+
   &:hover {
     background: #F0F0F0;
-    
   }
+
+
 `;
 
 BackButton.defaultProps = {
