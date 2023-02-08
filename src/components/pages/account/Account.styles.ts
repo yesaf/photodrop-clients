@@ -156,10 +156,6 @@ export const ActionButton = styled(Link)`
     & > .explanation {
       margin-top: 10px;
       font-weight: 400;
-
-      @media screen and (min-width: 1440px) {
-        //margin-top: 8px;
-      }
     }
   }
 

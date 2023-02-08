@@ -36,7 +36,7 @@ function Photo({ photo, height, width }: IPhotoProps) {
 
             setImageStyle(imageStyle);
         };
-    }, [photo]);
+    }, [photo, width, height]);
 
     const handleImageClick = () => {
         setShowFullImage(true);

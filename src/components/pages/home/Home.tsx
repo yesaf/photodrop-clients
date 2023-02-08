@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import NoAlbums from './components/noAlbums/NoAlbums';
 import WithAlbums from './components/withAlbums/WithAlbums';
+
 import data, { IAlbum } from '@/api/tmp/data';
 
 function Home() {

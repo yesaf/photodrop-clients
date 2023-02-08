@@ -71,8 +71,9 @@ export const LayoutMain = styled.main`
   background-color: #fff;
   width: 100%;
   display: flex;
+  flex-direction: column;
   position: relative;
-  justify-content: center;
+  align-items: center;
 
   & > div:first-child {
     width: 375px;

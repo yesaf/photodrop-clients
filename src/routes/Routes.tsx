@@ -9,14 +9,15 @@ import Avatar from '../components/pages/avatar/Avatar';
 import Home from '../components/pages/home/Home';
 import Account from '../components/pages/account/Account';
 import ChangeName from '../components/pages/changeName/ChangeName';
-import Album from '@/components/pages/album/Album';
-import SetUserData from '@/components/pages/setUserData/SetUserData';
+import Album from '../components/pages/album/Album';
+import SetUserData from '../components/pages/setUserData/SetUserData';
+import Terms from '../components/pages/legalInfo/Terms';
 
 function Routes() {
     return (
         <ReactRoutes>
             <Route path="/" element={
-                <Layout right={<AccountButton/>}>
+                <Layout right={<AccountButton/>} withFooter>
                     <Home/>
                 </Layout>
             }/>
@@ -40,6 +41,9 @@ function Routes() {
             <Route path="/albums/:id" element={<Album/>}/>
 
             <Route path="/hello" element={<Layout><SetUserData/></Layout>}/>
+
+            <Route path="/terms" element={<Layout><Terms/></Layout>}/>
+
 
         </ReactRoutes>
     );

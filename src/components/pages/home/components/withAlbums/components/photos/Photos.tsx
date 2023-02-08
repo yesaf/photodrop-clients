@@ -1,6 +1,6 @@
 import { IAlbum, IPhoto } from '@/api/tmp/data';
 import styled from 'styled-components';
-import { memo, useMemo } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import Photo from '@/components/shared/photo/Photo';
 
 interface IPhotosProps {
@@ -8,6 +8,11 @@ interface IPhotosProps {
 }
 
 function Photos({ albums }: IPhotosProps) {
+    const [sizes, setSizes] = useState({
+        width: 0,
+        height: 0,
+    });
+
     const photos: IPhoto[] = useMemo(() => {
         const photosArray: IPhoto[] = [];
 
@@ -20,6 +25,23 @@ function Photos({ albums }: IPhotosProps) {
         return photosArray;
     }, [albums]);
 
+    const adaptSize = useCallback(() => {
+        const width = window.innerWidth;
+
+        width < 1440 ?
+            setSizes({ width: 125, height: 125 }) :
+            setSizes({ width: 400, height: 400 });
+    }, [window.innerWidth]);
+
+    useEffect(() => {
+        adaptSize();
+        window.addEventListener('resize', adaptSize);
+
+        return () => {
+            window.removeEventListener('resize', adaptSize);
+        };
+    }, [adaptSize]);
+
     return (
         <Container>
             <header>All photos</header>
@@ -27,7 +49,7 @@ function Photos({ albums }: IPhotosProps) {
                 {
                     photos.map((photo, index) => (
                         <Photo key={index} photo={photo}
-                               width={125} height={125}/>
+                               width={sizes.width} height={sizes.height}/>
                     ))
                 }
             </div>
@@ -41,9 +63,14 @@ const Container = styled.div`
   width: 375px;
   margin-top: 40px;
 
+  @media screen and (min-width: 1440px) {
+    width: 1200px;
+    margin-top: 100px;
+  }
+
   & > header {
     padding: 0 15px;
-    
+
     font-weight: 500;
     font-size: 14px;
     line-height: 18px;
