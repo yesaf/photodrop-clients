@@ -28,7 +28,6 @@ function PhoneEnter({ onPhoneEntered }: IPhoneEnterProps) {
                 defaultCountry={'UA'}
                 value={phoneNumber}
                 addInternationalOption={false}
-                onCountryChange={(country: string) => console.log(country)}
                 countrySelectComponent={CountryButton}
                 onChange={setPhoneNumber}
             />

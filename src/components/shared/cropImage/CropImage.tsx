@@ -4,13 +4,14 @@ import closeIcon from '@/assets/images/icons/close.svg';
 import { Background, Container, ActionsContainer, CropContainer, CropHeader } from './CropImage.styles';
 
 interface CropImageProps {
-    initialImage: string;
-    onDone: (image: string, croppedArea: Area, zoom: string) => void;
+    initialImage: File;
+    onDone: (image: string | File, croppedArea: Area, zoom: string) => void;
     onDiscard: () => void;
 }
 
 function CropImage({ initialImage, onDone, onDiscard }: CropImageProps) {
-    const [image, setImage] = useState(initialImage);
+    const [image, setImage] = useState<File>(initialImage);
+    const [imageSrc, setImageSrc] = useState<string | undefined>();
     const [coverType, setCoverType] = useState<'vertical-cover' | 'horizontal-cover' | undefined>();
 
     const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -22,26 +23,30 @@ function CropImage({ initialImage, onDone, onDiscard }: CropImageProps) {
     }, []);
 
     useEffect(() => {
-        const i = new Image();
-        i.src = image;
-        i.onload = () => {
-            setCoverType(i.width > i.height ? 'vertical-cover' : 'horizontal-cover');
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = () => {
+            setImageSrc(reader.result as string);
         };
     }, [image]);
+
+    useEffect(() => {
+        if (!imageSrc) return;
+        const i = new Image();
+        i.src = imageSrc;
+        i.onload = () => {
+            setCoverType(i.width > i.height ? 'vertical-cover' : 'horizontal-cover');
+        }
+    }, [imageSrc]);
 
     const handleSelfieChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                setImage(reader.result as string);
-            };
+            setImage(file);
         }
     }, []);
 
     const onCropComplete = useCallback((croppedArea: Area) => {
-        console.log(croppedArea);
         setCroppedArea(croppedArea);
     }, [setCroppedArea]);
 
@@ -66,7 +71,7 @@ function CropImage({ initialImage, onDone, onDiscard }: CropImageProps) {
                     {
                         coverType &&
                         <Cropper
-                            image={image}
+                            image={imageSrc}
                             crop={crop}
                             zoom={zoom}
                             cropShape={'round'}

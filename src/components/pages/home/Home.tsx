@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import NoAlbums from './components/noAlbums/NoAlbums';
 import WithAlbums from './components/withAlbums/WithAlbums';
 
 import data, { IAlbum } from '@/api/tmp/data';
+import { AuthContext } from '@/routes/ProtectedRoute';
 
 function Home() {
+    const user = useContext(AuthContext);
     const [albums, setAlbums] = useState<IAlbum[] | undefined>(data);
 
     return (

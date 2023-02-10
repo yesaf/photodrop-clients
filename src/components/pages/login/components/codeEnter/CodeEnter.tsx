@@ -8,8 +8,10 @@ interface ICodEnterProps {
 }
 
 function CodeEnter({ phone, onCodeEntered }: ICodEnterProps) {
+    const [code, setCode] = useState<string>('');
     const [disableButton, setDisableButton] = useState(true);
     const handleCodeChanged = useCallback((code: string) => {
+        setCode(code);
         setDisableButton(code.length !== 6);
     }, []);
 
@@ -17,9 +19,13 @@ function CodeEnter({ phone, onCodeEntered }: ICodEnterProps) {
         <FormContainer>
             <h2>What's the code?</h2>
             <p>Enter the code sent to <b>{phone}</b></p>
-            <CodeInput onCodeEntered={onCodeEntered} onCodeChanged={handleCodeChanged}/>
+            <CodeInput onCodeChanged={handleCodeChanged}/>
             <button className="resend-button">Resend</button>
-            <button className="next-button" disabled={disableButton}>Next</button>
+            <button className="next-button"
+                    disabled={disableButton}
+                    onClick={() => onCodeEntered(code)}>
+                Next
+            </button>
         </FormContainer>
     );
 }

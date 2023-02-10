@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 interface ICodeInputProps {
-    onCodeEntered: (code: string) => void;
     onCodeChanged: (code: string) => void;
 }
 
-function CodeInput({ onCodeEntered, onCodeChanged }: ICodeInputProps) {
+function CodeInput({ onCodeChanged }: ICodeInputProps) {
     const [code, setCode] = useState<string>('');
     const getCodePart = (index: number) => {
         return code[index] || '';
@@ -30,10 +29,6 @@ function CodeInput({ onCodeEntered, onCodeChanged }: ICodeInputProps) {
         if (index < 5 && value) {
             const nextInput = document.getElementById(`code-input-${index+1}`) as HTMLInputElement;
             nextInput.focus();
-        }
-
-        if (index === 5) {
-            onCodeEntered(code);
         }
     };
 

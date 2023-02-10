@@ -1,22 +1,42 @@
 import PhoneEnter from './components/phoneEnter/PhoneEnter';
 import { useState } from 'react';
 import CodeEnter from './components/codeEnter/CodeEnter';
-import { isValidPhoneNumber } from 'react-phone-number-input';
+import { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import BackButton from '@/components/shared/backButton/BackButton';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+
+import authService from '@/api/services/auth';
 
 function Login() {
     const [phone, setPhone] = useState<string | undefined>();
-    const [code, setCode] = useState<string | undefined>();
+    const navigate = useNavigate();
 
     const handlePhoneEntered = (phone: string) => {
         if (isValidPhoneNumber(phone)) {
-            setPhone(phone);
+            const phoneData = parsePhoneNumber(phone);
+            if (phoneData)
+                authService.sendOtp(phoneData.countryCallingCode, phoneData.nationalNumber)
+                    .then(() => {
+                    setPhone(phone);
+                });
         }
     };
 
     const handleCodeEntered = (code: string) => {
-        setCode(code);
+        const phoneData = parsePhoneNumber(phone as string);
+        if (phoneData)
+            authService.verifyOtp(phoneData.countryCallingCode, phoneData.nationalNumber, code)
+                .then((res) => {
+                    if (!res.user) {
+                        // Error handling
+                    } else if (res.selfie) {
+                        navigate('/');
+                    } else {
+                        navigate('/avatar');
+                    }
+            });
+
     };
 
     return (

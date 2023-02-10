@@ -9,13 +9,15 @@ export const Background = styled.div`
   height: 100vh;
 
   background-color: #262626;
-  // media background
-  //background: rgba(0, 0, 0, 0.95);
 
   display: flex;
   justify-content: center;
 
   z-index: 100;
+  
+  @media screen and (min-width: 1440px) {
+    background: rgba(0, 0, 0, 0.95);
+  }
 `;
 
 export const Container = styled.div`

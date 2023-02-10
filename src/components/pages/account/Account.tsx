@@ -5,17 +5,23 @@ import arrowRight from '@/assets/images/icons/arrow-right.svg';
 import CropImage from '@/components/shared/cropImage/CropImage';
 
 import { AccountContainer, SelfieContainer, EditButton, ActionButton } from './Account.styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import imageUrlToFile from '@/utils/imageUrlToFile';
 
 
 function Account() {
     const user = {
         name: 'John Smith',
         phone: '+380 67 123 45 67',
-        avatar: undefined,
+        avatar: 'https://i.pinimg.com/474x/94/cb/68/94cb68baea50bb98cdab65b74e731c1c.jpg',
     };
 
     const [isEditAvatar, setIsEditAvatar] = useState(false);
+    const [selfie, setSelfie] = useState<File | undefined>();
+
+    useEffect(() => {
+        imageUrlToFile(user.avatar, 'avatar').then(file => setSelfie(file));
+    }, []);
 
     const handleEditAvatarDone = () => {
         setIsEditAvatar(false);
@@ -33,8 +39,8 @@ function Account() {
                     </svg>
                 </EditButton>
                 {
-                    isEditAvatar &&
-                    <CropImage initialImage={user.avatar || defaultAvatar}
+                    isEditAvatar && selfie &&
+                    <CropImage initialImage={selfie}
                                onDone={handleEditAvatarDone}
                                onDiscard={() => setIsEditAvatar(false)}/>
                 }

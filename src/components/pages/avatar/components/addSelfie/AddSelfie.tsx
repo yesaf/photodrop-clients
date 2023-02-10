@@ -3,18 +3,14 @@ import { AddButton, SelfieContainer } from './AddSelfie.styles';
 import { ChangeEvent } from 'react';
 
 interface IAddSelfieProps {
-    onAddSelfie: (image: string) => void;
+    onAddSelfie: (image: File) => void;
 }
 
 function AddSelfie({ onAddSelfie }: IAddSelfieProps) {
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                onAddSelfie(reader.result as string);
-            };
+            onAddSelfie(file);
         }
     };
 
