@@ -35,6 +35,7 @@ class AuthService {
             .catch((error) => {
                 return error.response;
             });
+
         if (data.accessToken) {
             localStorage.setItem('token', data.accessToken);
         }

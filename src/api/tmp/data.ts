@@ -66,4 +66,4 @@ for (let i = 0; i < 10; i++) {
     albumsExtended.push(...albums);
 }
 
-export default albums;
+export default albumsExtended;

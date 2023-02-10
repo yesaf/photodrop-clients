@@ -11,12 +11,12 @@ function Loader() {
 }
 
 const LoaderContainer = styled.div`
-  position: absolute;
-  top: -55px;
+  position: fixed;
+  top: 0;
   left: 0;
 
   height: 100vh;
-  width: 100%;
+  width: 100% !important;
 
   display: flex;
     flex-direction: column;
