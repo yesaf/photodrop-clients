@@ -20,6 +20,7 @@ function Photo({ photo, height, width }: IPhotoProps) {
     const [showFullImage, setShowFullImage] = useState(false);
 
     useEffect(() => {
+        if (!width || !height) return;
         const image = new Image();
         image.src = photo.unlockedThumbnailUrl;
         image.onload = () => {
