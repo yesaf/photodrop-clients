@@ -31,8 +31,18 @@ export const Container = styled.div`
 
   padding: 15px;
 
+  @media screen and (min-width: 1440px) {
+    padding: 0;
+    width: 100%;
+  }
+  
   & > img {
     width: 100%;
+    
+    @media screen and (min-width: 1440px) {
+      width: auto;
+      height: 100%;
+    }
   }
 
 `;
@@ -53,6 +63,11 @@ export const CloseButton = styled.button`
   align-items: center;
   
   border-radius: 50%;
+  
+  @media screen and (min-width: 1440px) {
+    top: 23px;
+    left: 32px;
+  }
   
   &:hover {
     background: rgba(255, 255, 255, 0.2);

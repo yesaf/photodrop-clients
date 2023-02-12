@@ -13,7 +13,7 @@ function Account() {
     const user = {
         name: 'John Smith',
         phone: '+380 67 123 45 67',
-        avatar: 'https://i.pinimg.com/474x/94/cb/68/94cb68baea50bb98cdab65b74e731c1c.jpg',
+        avatar: 'https://photodrop-lambda-bucket-test.s3.amazonaws.com/4f346692-2a57-41b5-90b4-2a2647cb774f.jpg',
     };
 
     const [isEditAvatar, setIsEditAvatar] = useState(false);

@@ -24,7 +24,7 @@ function Actions({ photoUrl, isLocked }: IActionsProps) {
 
     if (isLocked) {
         return (
-            <ActionsContainer>
+            <ActionsContainer className="locked">
                 <button className="unlock-btn">Unlock photo</button>
             </ActionsContainer>
         );
