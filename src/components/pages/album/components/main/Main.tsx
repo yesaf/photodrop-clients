@@ -1,34 +1,32 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import Photo from '@/components/shared/photo/Photo';
 
 import { StyledMain } from './Main.styles';
 
-import { IPhoto } from '@/api/tmp/data';
+import { IPhoto } from '@/api/types/albumResponses';
 
 interface IAlbumProps {
     albumPhotos: IPhoto[];
+    isLocked: boolean;
 }
 
-function Main({ albumPhotos }: IAlbumProps) {
-    const [sizes, setSizes] = useState({
-        width: 0,
-        height: 0,
-    });
+const getAdaptedSizes = () => {
+    const width = window.innerWidth;
 
-    const adaptSize = useCallback(() => {
-        const width = window.innerWidth;
+    return width < 1440 ?
+        { width: 125, height: 125 } :
+        { width: 400, height: 400 };
+};
 
-        width < 1440 ?
-            setSizes({ width: 125, height: 125 }) :
-            setSizes({ width: 400, height: 400 });
-    }, []);
+function Main({ albumPhotos, isLocked }: IAlbumProps) {
+    const [sizes, setSizes] = useState(getAdaptedSizes());
 
     useEffect(() => {
-        adaptSize();
-        window.addEventListener('resize', adaptSize);
+        const handleResize = () => setSizes(getAdaptedSizes());
+        window.addEventListener('resize', handleResize);
 
         return () => {
-            window.removeEventListener('resize', adaptSize);
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
 
@@ -39,14 +37,19 @@ function Main({ albumPhotos }: IAlbumProps) {
                     albumPhotos.map((photo: IPhoto, index) => (
                             <Photo key={index}
                                    photo={photo}
+                                   isLocked={isLocked}
                                    {...sizes}/>
                         ),
                     )
                 }
             </div>
-            <button className="unlock-button">
-                Unlock your photos
-            </button>
+            {
+                isLocked &&
+                <button className="unlock-button">
+                    Unlock your photos
+                </button>
+            }
+
         </StyledMain>
     );
 }

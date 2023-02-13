@@ -2,9 +2,10 @@ import frameologyLogo from '@/assets/images/frameology-logo.svg';
 import climateNeutralLogo from '@/assets/images/climate-neutral-logo.svg';
 import { Link } from 'react-router-dom';
 import { StyledFooter, Container } from './Footer.styles';
+import useIsMobile from '@/components/hooks/useIsMobile';
 
 function Footer() {
-    const isMobile = window.innerWidth < 1440;
+    const isMobile = useIsMobile();
 
     return (
         <StyledFooter>

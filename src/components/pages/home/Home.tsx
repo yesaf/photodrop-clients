@@ -1,22 +1,39 @@
-import { useContext, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NoAlbums from './components/noAlbums/NoAlbums';
 import WithAlbums from './components/withAlbums/WithAlbums';
-
-import data, { IAlbum } from '@/api/tmp/data';
-import { AuthContext } from '@/routes/ProtectedRoute';
+import albumService from '@/api/services/album';
+import { IAlbum } from '@/api/types/albumResponses';
+import Loader from '@/components/shared/loader/Loader';
 
 function Home() {
-    const user = useContext(AuthContext);
-    const [albums, setAlbums] = useState<IAlbum[] | undefined>(data);
+    const [albums, setAlbums] = useState<IAlbum[] | undefined>();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        albumService.getAlbums().then((albums) => {
+            setAlbums(albums);
+            setTimeout(() => setLoading(false), 500);
+        });
+    }, []);
 
     return (
-        <div className="home">
+        <>
             {
-                albums && albums.length > 0 ?
-                    <WithAlbums albums={albums}/> :
-                    <NoAlbums/>
+                loading &&
+                <Loader/>
             }
-        </div>
+            {
+                albums &&
+                <div className="home">
+                    {
+                        albums.length > 0 ?
+                            <WithAlbums albums={albums}/> :
+                            <NoAlbums/>
+                    }
+                </div>
+            }
+        </>
+
     );
 }
 

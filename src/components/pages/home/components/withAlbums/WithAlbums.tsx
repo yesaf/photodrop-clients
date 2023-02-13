@@ -1,7 +1,7 @@
-import { IAlbum } from '@/api/tmp/data';
+import { IAlbum } from '@/api/types/albumResponses';
 import Albums from './components/albums/Albums';
 import Photos from './components/photos/Photos';
-import { useState } from 'react';
+import { useMemo } from 'react';
 
 import { Container } from './WithAlbums.styles';
 
@@ -9,8 +9,11 @@ interface IWithAlbumsProps {
     albums: IAlbum[];
 }
 
+const isAnyAlbumLocked = (albums: IAlbum[]) => albums.some((album) => !album.isUnlocked);
+
+
 function WithAlbums({ albums }: IWithAlbumsProps) {
-    const [showUnlockButton, setShowUnlockButton] = useState(true);
+    const showUnlockButton = useMemo(() => isAnyAlbumLocked(albums), [albums]);
 
     return (
         <Container>

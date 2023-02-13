@@ -1,44 +1,46 @@
-import { IAlbum, IPhoto } from '@/api/tmp/data';
 import styled from 'styled-components';
-import { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import Photo from '@/components/shared/photo/Photo';
+import { IAlbum, IPhoto } from '@/api/types/albumResponses';
 
 interface IPhotosProps {
     albums: IAlbum[];
 }
 
-function Photos({ albums }: IPhotosProps) {
-    const [sizes, setSizes] = useState({
-        width: 0,
-        height: 0,
-    });
+interface IPhotoWithIsLocked extends IPhoto {
+    isLocked: boolean;
+}
 
-    const photos: IPhoto[] = useMemo(() => {
-        const photosArray: IPhoto[] = [];
+const getAdaptedSizes = () => {
+    const width = window.innerWidth;
+
+    return  width < 1440 ?
+        { width: 125, height: 125 } :
+        { width: 400, height: 400 };
+}
+
+function Photos({ albums }: IPhotosProps) {
+    const [sizes, setSizes] = useState(getAdaptedSizes());
+
+    const photos: IPhotoWithIsLocked[] = useMemo(() => {
+        const photosArray: IPhotoWithIsLocked[] = [];
 
         albums.forEach((album: IAlbum) => {
             album.photos.forEach((photo) => {
-                photosArray.push(photo);
+                const photoWithIsLocked = Object.assign(photo, { isLocked: !album.isUnlocked });
+                photosArray.push(photoWithIsLocked);
             });
         });
 
         return photosArray;
     }, [albums]);
 
-    const adaptSize = useCallback(() => {
-        const width = window.innerWidth;
-
-        width < 1440 ?
-            setSizes({ width: 125, height: 125 }) :
-            setSizes({ width: 400, height: 400 });
-    }, []);
-
     useEffect(() => {
-        adaptSize();
-        window.addEventListener('resize', adaptSize);
+        const handleResize = () => setSizes(getAdaptedSizes());
+        window.addEventListener('resize', handleResize);
 
         return () => {
-            window.removeEventListener('resize', adaptSize);
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
 
@@ -49,6 +51,7 @@ function Photos({ albums }: IPhotosProps) {
                 {
                     photos.map((photo, index) => (
                         <Photo key={index} photo={photo}
+                               isLocked={photo.isLocked}
                                {...sizes}/>
                     ))
                 }

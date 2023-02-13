@@ -3,6 +3,7 @@ import BackButton from '@/components/shared/backButton/BackButton';
 import { useMemo } from 'react';
 
 import { CustomHeader, InfoContainer } from './Header.styles';
+import useIsMobile from '@/components/hooks/useIsMobile';
 
 interface IHeaderProps {
     albumName: string;
@@ -13,7 +14,7 @@ interface IHeaderProps {
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 function Header({ albumName, albumDate, photosCount }: IHeaderProps) {
-    const isMobile = useMemo(() => window.innerWidth < 1440, []);
+    const isMobile = useIsMobile();
 
     const formattedDate = useMemo(() => {
         const date = new Date(albumDate);
@@ -23,6 +24,7 @@ function Header({ albumName, albumDate, photosCount }: IHeaderProps) {
 
         return `${monthNames[month]} ${day}, ${year}`;
     }, [albumDate]);
+
 
     return (
         <CustomHeader>

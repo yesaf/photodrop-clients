@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { memo, useEffect, useState } from 'react';
-import { IPhoto } from '@/api/tmp/data';
+import { IPhoto } from '@/api/types/albumResponses';
 
 import FullPhoto from './components/fullPhoto/FullPhoto';
 
@@ -13,16 +13,17 @@ interface IPhotoProps {
     photo: IPhoto;
     height: number;
     width: number;
+    isLocked: boolean;
 }
 
-function Photo({ photo, height, width }: IPhotoProps) {
+function Photo({ photo, height, width, isLocked }: IPhotoProps) {
     const [imageStyle, setImageStyle] = useState<IImageStyle | undefined>();
     const [showFullImage, setShowFullImage] = useState(false);
 
     useEffect(() => {
         if (!width || !height) return;
         const image = new Image();
-        image.src = photo.unlockedThumbnailUrl;
+        image.src = photo.thumbnail;
         image.onload = () => {
             const imageWidth = image.width;
             const imageHeight = image.height;
@@ -55,14 +56,14 @@ function Photo({ photo, height, width }: IPhotoProps) {
                                 e.key === 'Enter' && handleImageClick()}
                             style={{ height: height + 'px', width: width + 'px' }}>
                 {
-                    imageStyle && <img src={photo.unlockedThumbnailUrl} alt="photo" style={imageStyle}/>
+                    imageStyle && <img src={photo.thumbnail} alt="photo" style={imageStyle}/>
                 }
             </PhotoContainer>
 
             {
                 showFullImage &&
-                <FullPhoto photoUrl={photo.unlockedPhotoUrl}
-                           isLocked={false}
+                <FullPhoto photoUrl={photo.url}
+                           isLocked={isLocked}
                            onClose={handleFullImageClose}/>
             }
         </>

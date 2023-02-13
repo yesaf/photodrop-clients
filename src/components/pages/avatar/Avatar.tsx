@@ -11,7 +11,7 @@ function Avatar() {
         setSelfie(image)
     }
 
-    const handleDone = (image: string | File, croppedArea: Area, zoom: string) => {
+    const handleDone = (image: File, croppedArea: Area, zoom: string) => {
         const formData = new FormData();
         formData.append('files', image);
         formData.append('shiftX', `${croppedArea.x}`);

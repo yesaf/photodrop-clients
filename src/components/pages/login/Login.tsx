@@ -1,10 +1,11 @@
-import PhoneEnter from './components/phoneEnter/PhoneEnter';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import PhoneEnter from './components/phoneEnter/PhoneEnter';
 import CodeEnter from './components/codeEnter/CodeEnter';
 import { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import BackButton from '@/components/shared/backButton/BackButton';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 
 import authService from '@/api/services/auth';
 
@@ -30,7 +31,7 @@ function Login() {
                 .then((res) => {
                     if (!res.user) {
                         // Error handling
-                    } else if (res.selfie) {
+                    } else if (res.user.selfieId) {
                         navigate('/');
                     } else {
                         navigate('/avatar');

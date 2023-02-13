@@ -19,26 +19,28 @@ const LoaderContainer = styled.div`
   width: 100% !important;
 
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
   align-items: center;
 
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(4px);
-  
+
+  z-index: 1000;
+
   & > img {
     width: 75px;
     height: 75px;
-    
+
     margin-top: 250px;
   }
-  
-    & > span {
-      margin-top: 20px;
-      
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 23px;
-    }
+
+  & > span {
+    margin-top: 20px;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+  }
 `;
 
 export default Loader;

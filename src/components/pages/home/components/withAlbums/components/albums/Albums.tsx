@@ -1,4 +1,4 @@
-import { IAlbum } from '@/api/tmp/data';
+import { IAlbum } from '@/api/types/albumResponses';
 import { memo } from 'react';
 import { useHorizontalScroll } from '@/components/hooks/useHorizontalScroll';
 
@@ -22,7 +22,7 @@ function Albums({ albums }: IAlbumsProps) {
                         return (
                             <Album key={index} to={`/albums/${album.albumId}`}>
                                 <img className="cover"
-                                     src={album.photos[0].unlockedThumbnailUrl} alt="album cover"/>
+                                     src={album.cover} alt="album cover"/>
                                 <span className="name">{album.name}</span>
                             </Album>
                         );

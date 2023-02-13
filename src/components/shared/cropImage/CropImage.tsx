@@ -5,7 +5,7 @@ import { Background, Container, ActionsContainer, CropContainer, CropHeader } fr
 
 interface CropImageProps {
     initialImage: File;
-    onDone: (image: string | File, croppedArea: Area, zoom: string) => void;
+    onDone: (image: File, croppedArea: Area, zoom: string) => void;
     onDiscard: () => void;
 }
 

@@ -48,7 +48,7 @@ const privateRoutes: IPrivateRoute[] = [
         }
     },
     {
-        path: '/album/:id',
+        path: '/albums/:id',
         element: <Album/>,
         noLayout: true,
     },
