@@ -10,6 +10,7 @@ export interface IUser {
 export interface ISelfie {
     selfieId: string,
     selfieUrl: string,
+    selfieThumbnail: string,
     shiftX: number,
     shiftY: number,
     zoom: number,

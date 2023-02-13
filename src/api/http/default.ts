@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authService from '../services/auth';
 
-export const baseUrl = 'https://photodrop-client.onrender.com';
+export const baseUrl = 'https://pd-client.onrender.com';
 
 const defaultClient = axios.create({
     baseURL: baseUrl,

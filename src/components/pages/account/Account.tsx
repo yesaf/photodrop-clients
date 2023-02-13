@@ -4,36 +4,52 @@ import arrowRight from '@/assets/images/icons/arrow-right.svg';
 
 import CropImage from '@/components/shared/cropImage/CropImage';
 
-import { AccountContainer, SelfieContainer, EditButton, ActionButton } from './Account.styles';
-import { useEffect, useState } from 'react';
-import imageUrlToFile from '@/utils/imageUrlToFile';
+import { AccountContainer, SelfieContainer,
+    EditButton, ActionButton, AccountImage } from './Account.styles';
+import { ChangeEvent, useCallback, useContext, useState } from 'react';
+import { AuthContext } from '@/routes/ProtectedRoute';
+import { Area } from 'react-easy-crop';
 
+import accountService from '@/api/services/account';
+import { IAccount } from '@/components/hooks/useAccount';
 
 function Account() {
-    const user = {
-        name: 'John Smith',
-        phone: '+380 67 123 45 67',
-        avatar: 'https://photodrop-lambda-bucket-test.s3.amazonaws.com/4f346692-2a57-41b5-90b4-2a2647cb774f.jpg',
-    };
+    const account: IAccount = useContext(AuthContext);
 
     const [isEditAvatar, setIsEditAvatar] = useState(false);
     const [selfie, setSelfie] = useState<File | undefined>();
 
-    useEffect(() => {
-        imageUrlToFile(user.avatar, 'avatar').then(file => setSelfie(file));
-    }, []);
+    const handleFileChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setSelfie(file);
+            setIsEditAvatar(true);
+        }
+    }, [setSelfie, setIsEditAvatar]);
 
-    const handleEditAvatarDone = () => {
-        setIsEditAvatar(false);
+    const handleEditAvatarDone = (image: File, croppedArea: Area, zoom: string) => {
+        accountService.updateSelfie(image, croppedArea, zoom)
+            .then(() => {
+                window.location.reload();
+            });
     }
 
     return (
         <AccountContainer>
-            <header>Welcome, {user.name}.</header>
-            <SelfieContainer className="selfie-container">
+            <header>Welcome, {account.user?.fullName ? account.user?.fullName : 'user'}.</header>
+            <SelfieContainer >
                 <span>Your selfie</span>
-                <img src={user.avatar ? user.avatar : defaultAvatar} alt=""/>
-                <EditButton className="edit-button" onClick={() => setIsEditAvatar(true)}>
+                <div className="image-container">
+                    <AccountImage
+                        selfie={account.selfie}
+                        src={account.selfie?.selfieUrl ? account.selfie?.selfieUrl : defaultAvatar} alt=""/>
+                </div>
+
+                <EditButton className="edit-button"
+                            onClick={() =>
+                                document.getElementById('file-input')?.click()
+                            }>
+                    <input type="file" id="file-input" onChange={handleFileChange}/>
                     <svg>
                         <image href={editIcon}/>
                     </svg>

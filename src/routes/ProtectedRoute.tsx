@@ -22,6 +22,10 @@ function ProtectedRoute() {
         return <Navigate to="/auth"/>;
     }
 
+    if (!account.user.selfieId) {
+        return <Navigate to="/avatar"/>;
+    }
+
     return (
         <AuthContext.Provider value={account}>
             <Outlet/>

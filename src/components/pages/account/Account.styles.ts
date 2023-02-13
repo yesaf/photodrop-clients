@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { ISelfie } from '@/api/types/authResponses';
 
 export const AccountContainer = styled.div`
   display: flex;
@@ -59,18 +60,20 @@ export const SelfieContainer = styled.div`
     color: #262626;
   }
 
-  & > img {
+  & > .image-container {
     margin-top: 13px;
     border: 1px solid #CECCB5;
     border-radius: 50%;
     width: 100px;
     height: 100px;
+    overflow: hidden;
 
     @media screen and (min-width: 1440px) {
       width: 150px;
       height: 150px;
     }
   }
+  
 
 `;
 
@@ -94,6 +97,10 @@ export const EditButton = styled.button`
   padding: 0;
   background-color: transparent;
 
+  #file-input {
+    display: none;
+  }
+  
   & > svg {
     width: var(--size);
     height: var(--size);
@@ -179,3 +186,28 @@ export const ActionButton = styled(Link)`
     }
   }
 `;
+
+interface IAccountImageProps {
+    selfie: ISelfie | undefined;
+}
+
+export const AccountImage = styled.img.attrs<IAccountImageProps>(
+    ({ selfie }) => {
+        if (!selfie)
+            return {style: {height: '100%', width: '100%'}};
+
+        const { width, height, shiftX, shiftY, zoom } = selfie;
+        console.log(selfie);
+        const isHorizontal = width > height;
+
+        return {
+            style: {
+                width: isHorizontal ? '100%' : 'auto',
+                height: isHorizontal ? 'auto' : '100%',
+                transform:
+                    `translate(-${shiftX/zoom/2}%, ${shiftY*zoom}%)` +
+                    `scale(${zoom})`,
+            }
+        };
+
+    })<IAccountImageProps>``;

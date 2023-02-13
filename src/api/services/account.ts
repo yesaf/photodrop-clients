@@ -3,7 +3,10 @@ import defaultClient from '../http/default';
 import { Area } from 'react-easy-crop';
 
 class AuthService {
-    setSelfie(image: File, croppedArea: Area, zoom: string): Promise<AxiosResponse<any>> {
+    updateSelfie(image: File, croppedArea: Area, zoom: string): Promise<AxiosResponse<any>> {
+        console.log(image);
+        console.log(croppedArea);
+        console.log(zoom);
         const formData = new FormData();
 
         formData.append('files', image);

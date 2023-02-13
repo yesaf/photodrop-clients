@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+
 import NoAlbums from './components/noAlbums/NoAlbums';
 import WithAlbums from './components/withAlbums/WithAlbums';
+
 import albumService from '@/api/services/album';
 import { IAlbum } from '@/api/types/albumResponses';
 import Loader from '@/components/shared/loader/Loader';
@@ -12,7 +14,7 @@ function Home() {
     useEffect(() => {
         albumService.getAlbums().then((albums) => {
             setAlbums(albums);
-            setTimeout(() => setLoading(false), 500);
+            setLoading(false)
         });
     }, []);
 
