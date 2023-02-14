@@ -25,7 +25,7 @@ export interface IVerifyResponse {
     selfie?: ISelfie;
 }
 
-export interface IGetMeResponse {
+export interface IAccountResponse {
     user: IUser;
-    selfie?: ISelfie;
+    selfie: ISelfie;
 }

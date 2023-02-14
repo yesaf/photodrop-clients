@@ -6,15 +6,18 @@ import CropImage from '@/components/shared/cropImage/CropImage';
 
 import { AccountContainer, SelfieContainer,
     EditButton, ActionButton, AccountImage } from './Account.styles';
-import { ChangeEvent, useCallback, useContext, useState } from 'react';
-import { AuthContext } from '@/routes/ProtectedRoute';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { Area } from 'react-easy-crop';
 
 import accountService from '@/api/services/account';
-import { IAccount } from '@/components/hooks/useAccount';
+import { Account as IAccount } from '@/store/reducers/authReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { accountSelector } from '@/store/selectors/authSelectors';
+import { setAccountAction } from '@/store/actions/authActions';
 
 function Account() {
-    const account: IAccount = useContext(AuthContext);
+    const account: IAccount = useSelector(accountSelector);
+    const dispatch = useDispatch();
 
     const [isEditAvatar, setIsEditAvatar] = useState(false);
     const [selfie, setSelfie] = useState<File | undefined>();
@@ -29,8 +32,11 @@ function Account() {
 
     const handleEditAvatarDone = (image: File, croppedArea: Area, zoom: string) => {
         accountService.updateSelfie(image, croppedArea, zoom)
-            .then(() => {
-                window.location.reload();
+            .then((res) => {
+                const accountData = res.data;
+                dispatch(setAccountAction({ isLoaded: true, ...accountData }));
+                setSelfie(undefined);
+                setIsEditAvatar(false);
             });
     }
 

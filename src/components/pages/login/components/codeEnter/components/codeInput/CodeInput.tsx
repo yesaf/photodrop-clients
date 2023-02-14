@@ -38,6 +38,7 @@ function CodeInput({ onCodeChanged }: ICodeInputProps) {
             id={`code-input-${index}`}
             value={getCodePart(index)}
             onChange={handleCodeChange(index)}
+            autoComplete='off'
             maxLength={1}/>
     ));
 

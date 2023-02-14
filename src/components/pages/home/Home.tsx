@@ -13,6 +13,7 @@ function Home() {
 
     useEffect(() => {
         albumService.getAlbums().then((albums) => {
+            albums.reverse()
             setAlbums(albums);
             setLoading(false)
         });

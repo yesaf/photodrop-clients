@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import defaultAvatar from '@/assets/images/default-avatar.svg';
-import { memo, useContext } from 'react';
-import { AuthContext } from '@/routes/ProtectedRoute';
+import { memo } from 'react';
 import { ISelfie } from '@/api/types/authResponses';
+import { useSelector } from 'react-redux';
+import { accountSelector } from '@/store/selectors/authSelectors';
 
 function AccountButton() {
-    const account = useContext(AuthContext);
+    const account = useSelector(accountSelector)
 
     return (
         <AccountLink to="/me">
@@ -30,7 +31,6 @@ interface IAccountImageProps {
 
 const AccountImage = styled.img.attrs<IAccountImageProps>(
     ({ selfie }) => {
-        console.log(selfie);
         if (!selfie)
             return {style: {height: '100%', width: '100%'}};
 

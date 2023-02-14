@@ -197,7 +197,6 @@ export const AccountImage = styled.img.attrs<IAccountImageProps>(
             return {style: {height: '100%', width: '100%'}};
 
         const { width, height, shiftX, shiftY, zoom } = selfie;
-        console.log(selfie);
         const isHorizontal = width > height;
 
         return {

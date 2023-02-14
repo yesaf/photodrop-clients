@@ -70,6 +70,12 @@ export const Container = styled.div`
       background: #2A00A6;
     }
 
+    &:disabled {
+      // semi dark gray on disabled
+      background: #cccccc;
+      color: #666666;
+    }
+
     @media screen and (min-width: 1440px) {
       width: 420px;
       font-size: 22px;

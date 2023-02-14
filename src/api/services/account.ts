@@ -1,12 +1,10 @@
 import { AxiosResponse } from 'axios';
 import defaultClient from '../http/default';
 import { Area } from 'react-easy-crop';
+import { IAccountResponse } from '@/api/types/authResponses';
 
 class AuthService {
-    updateSelfie(image: File, croppedArea: Area, zoom: string): Promise<AxiosResponse<any>> {
-        console.log(image);
-        console.log(croppedArea);
-        console.log(zoom);
+    updateSelfie(image: File, croppedArea: Area, zoom: string): Promise<AxiosResponse<IAccountResponse>> {
         const formData = new FormData();
 
         formData.append('files', image);
@@ -26,9 +24,9 @@ class AuthService {
         });
     }
 
-    changeName(name: string): Promise<AxiosResponse<any>> {
-        return defaultClient.post('/user/change-name', {
-            name,
+    updateName(fullName: string): Promise<AxiosResponse<IAccountResponse>> {
+        return defaultClient.put('/user/update-name', {
+            fullName,
         }).catch(e => {
             console.log(e.response);
             return e.response;

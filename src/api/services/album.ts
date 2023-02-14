@@ -27,6 +27,17 @@ class AlbumService {
                 }
             });
     }
+
+    payAlbum(id: string): Promise<string> {
+        return defaultClient.post(`/pay/album/create-payment/${id}`)
+            .then((response) => {
+                return response.data;
+            })
+            .catch(e => {
+                console.log(e.response);
+                return e.response;
+            });
+    }
 }
 
 export default new AlbumService();

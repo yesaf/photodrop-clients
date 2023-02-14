@@ -4,6 +4,8 @@ import { useMemo } from 'react';
 
 import { CustomHeader, InfoContainer } from './Header.styles';
 import useIsMobile from '@/components/hooks/useIsMobile';
+import albumService from '@/api/services/album';
+import { useParams } from 'react-router-dom';
 
 interface IHeaderProps {
     albumName: string;
@@ -14,6 +16,7 @@ interface IHeaderProps {
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 function Header({ albumName, albumDate, photosCount }: IHeaderProps) {
+    const { id } = useParams<{ id: string }>();
     const isMobile = useIsMobile();
 
     const formattedDate = useMemo(() => {
@@ -24,6 +27,14 @@ function Header({ albumName, albumDate, photosCount }: IHeaderProps) {
 
         return `${monthNames[month]} ${day}, ${year}`;
     }, [albumDate]);
+
+    const handlePay = () => {
+        if (id)
+            albumService.payAlbum(id)
+                .then((url) => {
+                    window.location.replace(url);
+                });
+    }
 
 
     return (
@@ -37,7 +48,7 @@ function Header({ albumName, albumDate, photosCount }: IHeaderProps) {
             </InfoContainer>
             {
                 !isMobile &&
-                    <button className="unlock-button">
+                    <button className="unlock-button" onClick={handlePay}>
                         Unlock your photos
                     </button>
             }

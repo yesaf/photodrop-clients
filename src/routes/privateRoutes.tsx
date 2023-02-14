@@ -5,7 +5,7 @@ import Account from '@/components/pages/account/Account';
 import BackButton from '@/components/shared/backButton/BackButton';
 import ChangeName from '@/components/pages/changeName/ChangeName';
 import Album from '@/components/pages/album/Album';
-import SetUserData from '@/components/pages/setUserData/SetUserData';
+import HelloUser from '@/components/pages/helloUser/HelloUser';
 
 interface ILayoutProps {
     right?: React.ReactNode;
@@ -54,7 +54,7 @@ const privateRoutes: IPrivateRoute[] = [
     },
     {
         path: '/hello',
-        element: <SetUserData/>,
+        element: <HelloUser/>,
     },
 
 ];

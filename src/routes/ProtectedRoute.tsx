@@ -1,18 +1,29 @@
 import { Outlet, Navigate } from 'react-router-dom';
-import React from 'react';
-import useAccount, { IAccount } from '@/components/hooks/useAccount';
-import Loader from '@/components/shared/loader/Loader';
-import Layout from '@/components/shared/layout/Layout';
+import { useEffect } from 'react';
 import tokenExists from '@/utils/tokenExists';
 
-export const AuthContext = React.createContext<IAccount>({} as IAccount);
+import useAccount from '@/components/hooks/useAccount';
+import Loader from '@/components/shared/loader/Loader';
+import Layout from '@/components/shared/layout/Layout';
+
+import { useDispatch } from 'react-redux';
+import { setAccountAction } from '@/store/actions/authActions';
+import { Account } from '@/store/reducers/authReducer';
+
 
 function ProtectedRoute() {
-    const account = useAccount();
+    const account: Account = useAccount();
+    const dispatch = useDispatch();
 
     if (!tokenExists()) {
         return <Navigate to="/auth"/>;
     }
+
+    useEffect(() => {
+        if (account.isLoaded) {
+            dispatch(setAccountAction(account));
+        }
+    }, [account]);
 
     if (!account.isLoaded) {
         return <Layout><Loader/></Layout>;
@@ -27,9 +38,7 @@ function ProtectedRoute() {
     }
 
     return (
-        <AuthContext.Provider value={account}>
-            <Outlet/>
-        </AuthContext.Provider>
+        <Outlet/>
     );
 }
 

@@ -1,40 +1,6 @@
-import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useState } from 'react';
 
-function SetUserData() {
-    const [user, setUser] = useState({
-        id: '12412',
-        // name: 'Some Name',
-        name: '',
-    });
-
-    const [name, setName] = useState('');
-
-
-    if (user.name) {
-        return <Navigate to="/"/>
-    }
-
-    return (
-        <Container>
-            <h2>Let’s get to know you</h2>
-            <input
-                type="text"
-                value={name}
-                placeholder="What’s your name?"
-                onChange={(e) => setName(e.target.value)}
-            />
-            <button onClick={() => {
-                setUser({ ...user, name });
-            }} disabled={!name}>
-                See your photos!
-            </button>
-        </Container>
-    );
-}
-
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,6 +62,3 @@ const Container = styled.div`
     }
   }
 `;
-
-
-export default SetUserData;

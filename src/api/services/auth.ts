@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import defaultClient from '../http/default';
 import { baseUrl } from '../http/default';
-import { IGetMeResponse, IVerifyResponse } from '../types/authResponses';
+import { IAccountResponse, IVerifyResponse } from '../types/authResponses';
 
 class AuthService {
     async sendOtp(countryCode: string, phoneNumber: string) {
@@ -45,7 +45,7 @@ class AuthService {
         return data;
     }
 
-    getMe(): Promise<AxiosResponse<IGetMeResponse>> {
+    getMe(): Promise<AxiosResponse<IAccountResponse>> {
         return defaultClient.get('/auth/me').catch((error) => {
             return error.response;
         });

@@ -1,9 +1,11 @@
 import { memo, useEffect, useState } from 'react';
 import Photo from '@/components/shared/photo/Photo';
 
-import { StyledMain } from './Main.styles';
-
+import albumService from '@/api/services/album';
 import { IPhoto } from '@/api/types/albumResponses';
+
+import { StyledMain } from './Main.styles';
+import { useParams } from 'react-router-dom';
 
 interface IAlbumProps {
     albumPhotos: IPhoto[];
@@ -20,6 +22,7 @@ const getAdaptedSizes = () => {
 
 function Main({ albumPhotos, isLocked }: IAlbumProps) {
     const [sizes, setSizes] = useState(getAdaptedSizes());
+    const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
         const handleResize = () => setSizes(getAdaptedSizes());
@@ -29,6 +32,14 @@ function Main({ albumPhotos, isLocked }: IAlbumProps) {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    const handlePay = () => {
+        if (id)
+            albumService.payAlbum(id)
+                .then((url) => {
+                    window.location.replace(url);
+                });
+    }
 
     return (
         <StyledMain>
@@ -45,7 +56,7 @@ function Main({ albumPhotos, isLocked }: IAlbumProps) {
             </div>
             {
                 isLocked &&
-                <button className="unlock-button">
+                <button className="unlock-button" onClick={handlePay}>
                     Unlock your photos
                 </button>
             }

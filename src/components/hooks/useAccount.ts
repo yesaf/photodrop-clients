@@ -1,17 +1,12 @@
-import { ISelfie, IUser } from '@/api/types/authResponses';
 import { useEffect, useState } from 'react';
 import authService from '@/api/services/auth';
+import { Account } from '@/store/reducers/authReducer';
 
-export interface IAccount {
-    user: IUser | undefined;
-    selfie?: ISelfie;
-    isLoaded: boolean;
-}
-
-export default function useAccount() {
-    const [account, setAccount] = useState<IAccount>({
-        user: undefined,
+export default function useAccount(): Account {
+    const [account, setAccount] = useState<Account>({
         isLoaded: false,
+        user: undefined,
+        selfie: undefined,
     });
 
     useEffect(() => {
@@ -24,10 +19,10 @@ export default function useAccount() {
                     isLoaded: true,
                 });
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
                 setAccount({
                     user: undefined,
+                    selfie: undefined,
                     isLoaded: true,
                 });
             });
