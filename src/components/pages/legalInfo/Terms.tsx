@@ -1,6 +1,12 @@
 import { Container } from './LegalInfo.styles';
+import { useEffect } from 'react';
 
 function Terms() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, []);
+
     return (
         <Container>
             <h2>Terms of service</h2>

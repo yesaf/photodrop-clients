@@ -33,8 +33,8 @@ function Footer() {
                     isMobile &&
                     <p className="copyright">© 2022 FOM Online Inc</p>
                 }
-                <Link to="/" className="terms">Terms</Link>
-                <Link to="/" className="privacy">Privacy Party</Link>
+                <Link to="/terms" className="terms">Terms</Link>
+                <Link to={{}} className="privacy">Privacy Party</Link>
             </Container>
         </StyledFooter>
     );
