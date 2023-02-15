@@ -6,6 +6,7 @@ import BackButton from '@/components/shared/backButton/BackButton';
 import ChangeName from '@/components/pages/changeName/ChangeName';
 import Album from '@/components/pages/album/Album';
 import HelloUser from '@/components/pages/helloUser/HelloUser';
+import PaymentSuccess from '@/components/pages/paymentSuccess/PaymentSuccess';
 
 interface ILayoutProps {
     right?: React.ReactNode;
@@ -56,7 +57,13 @@ const privateRoutes: IPrivateRoute[] = [
         path: '/hello',
         element: <HelloUser/>,
     },
-
+    {
+        path: '/success/:id',
+        element: <PaymentSuccess/>,
+        layoutProps: {
+            right: <AccountButton/>,
+        },
+    },
 ];
 
 export default privateRoutes;
