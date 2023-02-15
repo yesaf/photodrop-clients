@@ -51,7 +51,7 @@ function PaymentSuccess() {
             <AlbumCoverContainer>
                 {
                     coverStyle &&
-                    <img src={album.photos[0].url} alt="" style={coverStyle}/>
+                    <img src={album.cover} alt="" style={coverStyle}/>
                 }
             </AlbumCoverContainer>
             <SeePhotosButton to={'/albums/' + album.albumId}>
