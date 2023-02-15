@@ -16,7 +16,7 @@ function Layout({ children, left, right, withFooter }: ILayoutProps) {
                 <HeaderButtonContainer className="left" isShown={!!left}>
                     {left}
                 </HeaderButtonContainer>
-                <HeaderLink to="/auth">
+                <HeaderLink to="/">
                     <svg>
                         <image href={logo}/>
                     </svg>

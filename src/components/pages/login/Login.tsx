@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 import PhoneEnter from './components/phoneEnter/PhoneEnter';
 import CodeEnter from './components/codeEnter/CodeEnter';
@@ -8,10 +8,15 @@ import BackButton from '@/components/shared/backButton/BackButton';
 import styled from 'styled-components';
 
 import authService from '@/api/services/auth';
+import tokenExists from '@/utils/tokenExists';
 
 function Login() {
     const [phone, setPhone] = useState<string | undefined>();
     const navigate = useNavigate();
+
+    if (tokenExists()) {
+        return <Navigate to="/"/>
+    }
 
     const handlePhoneEntered = (phone: string) => {
         if (isValidPhoneNumber(phone)) {
