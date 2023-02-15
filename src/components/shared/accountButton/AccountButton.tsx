@@ -18,11 +18,14 @@ function AccountButton() {
 }
 
 const AccountLink = styled(Link)`
-  display: block;
   width: 35px;
   height: 35px;
   overflow: hidden;
   border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 interface IAccountImageProps {
@@ -42,7 +45,7 @@ const AccountImage = styled.img.attrs<IAccountImageProps>(
                 width: isVertical ? '100%' : 'auto',
                 height: isVertical ? 'auto' : '100%',
                 transform:
-                    `translate(-${shiftX/zoom/2}%, ${shiftY*zoom}%)` +
+                    `translate(${-shiftX*zoom + (50*zoom - 50)}%, ${-shiftY*zoom*2 + (50*zoom - 50)}%)` +
                     `scale(${zoom})`,
             }
         };

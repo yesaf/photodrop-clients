@@ -67,6 +67,11 @@ export const SelfieContainer = styled.div`
     width: 100px;
     height: 100px;
     overflow: hidden;
+    box-sizing: content-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @media screen and (min-width: 1440px) {
       width: 150px;
@@ -204,7 +209,7 @@ export const AccountImage = styled.img.attrs<IAccountImageProps>(
                 width: isHorizontal ? '100%' : 'auto',
                 height: isHorizontal ? 'auto' : '100%',
                 transform:
-                    `translate(-${shiftX/zoom/2}%, ${shiftY*zoom}%)` +
+                    `translate(${-shiftX*zoom + (50*zoom - 50)}%, ${-shiftY*zoom*2 + (50*zoom - 50)}%)` +
                     `scale(${zoom})`,
             }
         };
