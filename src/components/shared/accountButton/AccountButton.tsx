@@ -22,10 +22,6 @@ const AccountLink = styled(Link)`
   height: 35px;
   overflow: hidden;
   border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 interface IAccountImageProps {
