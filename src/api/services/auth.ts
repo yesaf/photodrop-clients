@@ -19,7 +19,6 @@ class AuthService {
             phoneNumber,
             otp,
         }).catch((error) => {
-            console.log(error);
             return error.response;
         });
 

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useMemo } from 'react';
 import Photo from '@/components/shared/photo/Photo';
 import { IAlbum, IPhoto } from '@/api/types/albumResponses';
+import useIsMobile from '@/components/hooks/useIsMobile';
 
 interface IPhotosProps {
     albums: IAlbum[];
@@ -11,16 +12,18 @@ interface IPhotoWithIsLocked extends IPhoto {
     isLocked: boolean;
 }
 
-const getAdaptedSizes = () => {
-    const width = window.innerWidth;
-
-    return  width < 1440 ?
-        { width: 125, height: 125 } :
-        { width: 400, height: 400 };
+interface ISizes {
+    width: number;
+    height: number;
 }
 
 function Photos({ albums }: IPhotosProps) {
-    const [sizes, setSizes] = useState(getAdaptedSizes());
+    const isMobile = useIsMobile();
+    const sizes: ISizes = useMemo(() => {
+        return  isMobile ?
+            { width: 125, height: 125 } :
+            { width: 400, height: 400 };
+    }, [isMobile])
 
     const photos: IPhotoWithIsLocked[] = useMemo(() => {
         const photosArray: IPhotoWithIsLocked[] = [];
@@ -34,15 +37,6 @@ function Photos({ albums }: IPhotosProps) {
 
         return photosArray;
     }, [albums]);
-
-    useEffect(() => {
-        const handleResize = () => setSizes(getAdaptedSizes());
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
     return (
         <Container>

@@ -19,7 +19,6 @@ class AuthService {
                 'Content-Type': 'multipart/form-data',
             }
         }).catch(e => {
-            console.log(e.response);
             return e.response;
         });
     }
@@ -28,7 +27,6 @@ class AuthService {
         return defaultClient.put('/user/update-name', {
             fullName,
         }).catch(e => {
-            console.log(e.response);
             return e.response;
         });
     }

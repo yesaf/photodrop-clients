@@ -5,21 +5,14 @@ export const Container = styled.div`
   flex-direction: column;
   position: relative;
   align-items: center;
-  height: calc(100vh - 55px);
-  overflow-y: auto;
-  padding-bottom: 80px;
-  
-  @media screen and (min-width: 1440px) {
-    height: auto;
-  }
+  height: auto;
   
   &::-webkit-scrollbar {
     display: none;
   }
 
   & > .unlock-button {
-    position: fixed;
-    margin: 0 15px;
+    margin: 40px 15px 20px 15px;
     bottom: 17px;
     cursor: pointer;
 

@@ -2,14 +2,16 @@ import styled from 'styled-components';
 
 export const StyledFooter = styled.footer`
   width: 100%;
-  height: 682px;
+  //height: 682px;
+  height: 100%;
   background: #262626;
-
+  flex: 1;
+  
   display: flex;
   justify-content: center;
 
   @media screen and (min-width: 1440px) {
-    height: auto;
+    //height: auto;
   }
 `;
 
@@ -17,8 +19,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  height: 682px;
 
-  box-sizing: content-box;
+  box-sizing: border-box;
 
   width: 375px;
   color: #FFFFFF;
@@ -30,6 +33,7 @@ export const Container = styled.div`
     height: 323px;
     padding: 60px 0 40px 0;
     column-gap: 60px;
+    box-sizing: content-box;
   }
 
   & > h2 {
