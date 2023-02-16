@@ -2,17 +2,18 @@ import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import tokenExists from '@/utils/tokenExists';
 
-import useAccount from '@/components/hooks/useAccount';
 import Loader from '@/components/shared/loader/Loader';
 import Layout from '@/components/shared/layout/Layout';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAccountAction } from '@/store/actions/authActions';
 import { Account } from '@/store/reducers/authReducer';
+import { accountSelector } from '@/store/selectors/authSelectors';
+import authService from '@/api/services/auth';
 
 
 function ProtectedRoute() {
-    const account: Account = useAccount();
+    const account: Account = useSelector(accountSelector);
     const location = useLocation();
     const dispatch = useDispatch();
 
@@ -21,10 +22,25 @@ function ProtectedRoute() {
     }
 
     useEffect(() => {
-        if (account.isLoaded) {
-            dispatch(setAccountAction(account));
+        if (!account.isLoaded) {
+            authService.getMe()
+                .then((res) => res.data)
+                .then((res) => {
+                    dispatch(setAccountAction({
+                        user: res.user,
+                        selfie: res.selfie,
+                        isLoaded: true,
+                    }));
+                })
+                .catch(() => {
+                    dispatch(setAccountAction({
+                        user: undefined,
+                        selfie: undefined,
+                        isLoaded: true,
+                    }));
+                });
         }
-    }, [account]);
+    }, []);
 
     if (!account.isLoaded) {
         return <Layout><Loader/></Layout>;

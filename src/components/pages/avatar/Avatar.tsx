@@ -15,10 +15,6 @@ function Avatar() {
     const [selfie, setSelfie] = useState<File | undefined>();
     const dispatch = useDispatch();
 
-    if (account.user?.selfieId) {
-        return <Navigate to="/" replace/>
-    }
-
     const handleAddSelfie = useCallback((image: File) => {
         setSelfie(image);
     }, [setSelfie]);
@@ -30,6 +26,10 @@ function Avatar() {
                 dispatch(setAccountAction({ isLoaded: true, ...account }))
             });
     }, []);
+
+    if (account.user?.selfieId) {
+        return <Navigate to="/" replace/>
+    }
 
     return (
         <>

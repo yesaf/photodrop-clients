@@ -15,33 +15,35 @@ function Login() {
     const navigate = useNavigate();
 
     if (tokenExists()) {
-        return <Navigate to="/"/>
+        return <Navigate to="/"/>;
     }
 
     const handlePhoneEntered = (phone: string) => {
         if (isValidPhoneNumber(phone)) {
             const phoneData = parsePhoneNumber(phone);
-            if (phoneData)
+            if (phoneData) {
                 authService.sendOtp(phoneData.countryCallingCode, phoneData.nationalNumber)
                     .then(() => {
-                    setPhone(phone);
-                });
+                        setPhone(phone);
+                    });
+            }
         }
     };
 
     const handleCodeEntered = (code: string) => {
         const phoneData = parsePhoneNumber(phone as string);
-        if (phoneData)
+        if (phoneData) {
             authService.verifyOtp(phoneData.countryCallingCode, phoneData.nationalNumber, code)
                 .then((res) => {
                     if (!res.user) {
-                        // Error handling
+                        setPhone(undefined);
                     } else if (res.user.selfieId) {
                         navigate('/');
                     } else {
                         navigate('/avatar');
                     }
-            });
+                });
+        }
 
     };
 
