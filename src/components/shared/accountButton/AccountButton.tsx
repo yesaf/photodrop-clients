@@ -44,8 +44,9 @@ const AccountImage = styled.img.attrs<IAccountImageProps>(
             style: {
                 width: isVertical ? '100%' : 'auto',
                 height: isVertical ? 'auto' : '100%',
+                transformOrigin: '0 0',
                 transform:
-                    `translate(${-shiftX*zoom*0.85 + (50*zoom - 50)}%, ${-shiftY*zoom + (50*zoom - 50)}%)` +
+                    `translate(${-shiftX*zoom}%, ${-shiftY*zoom}%)` +
                     `scale(${zoom})`,
             }
         };

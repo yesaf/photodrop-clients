@@ -68,11 +68,7 @@ export const SelfieContainer = styled.div`
     height: 100px;
     overflow: hidden;
     box-sizing: content-box;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    
     @media screen and (min-width: 1440px) {
       width: 150px;
       height: 150px;
@@ -200,7 +196,7 @@ export const AccountImage = styled.img.attrs<IAccountImageProps>(
     ({ selfie }) => {
         if (!selfie)
             return {style: {height: '100%', width: '100%'}};
-
+        console.log(selfie);
         const { width, height, shiftX, shiftY, zoom } = selfie;
         const isHorizontal = width > height;
 
@@ -208,8 +204,9 @@ export const AccountImage = styled.img.attrs<IAccountImageProps>(
             style: {
                 width: isHorizontal ? '100%' : 'auto',
                 height: isHorizontal ? 'auto' : '100%',
+                transformOrigin: '0 0',
                 transform:
-                    `translate(${-shiftX*zoom*0.85 + (50*zoom - 50)}%, ${-shiftY*zoom + (50*zoom - 50)}%)` +
+                    `translate(${-shiftX*zoom}%, ${-shiftY*zoom}%)` +
                     `scale(${zoom})`,
             }
         };
