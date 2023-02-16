@@ -1,27 +1,33 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCallback, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import AddSelfie from './components/addSelfie/AddSelfie';
 import CropImage from '../../shared/cropImage/CropImage';
 import { Area } from 'react-easy-crop';
 
 import accountService from '@/api/services/account';
+import { useSelector } from 'react-redux';
+import { accountSelector } from '@/store/selectors/authSelectors';
 
 function Avatar() {
+    const account = useSelector(accountSelector);
     const [selfie, setSelfie] = useState<File | undefined>();
     const navigate = useNavigate();
 
-    const handleAddSelfie = (image: File) => {
-        setSelfie(image);
-    };
+    if (account.user?.selfieId) {
+        return <Navigate to="/" replace/>
+    }
 
-    const handleDone = (image: File, croppedArea: Area, zoom: string) => {
+    const handleAddSelfie = useCallback((image: File) => {
+        setSelfie(image);
+    }, [setSelfie]);
+
+    const handleDone = useCallback((image: File, croppedArea: Area, zoom: string) => {
         accountService.updateSelfie(image, croppedArea, zoom)
             .then(() => {
-                setTimeout(() => {window.location.reload()}, 100);
                 navigate('/', { replace: true });
             });
-    };
+    }, []);
 
     return (
         <>

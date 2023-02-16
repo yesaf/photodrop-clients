@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState, KeyboardEvent } from 'react';
 
 interface ICodeInputProps {
     onCodeChanged: (code: string) => void;
@@ -7,6 +7,7 @@ interface ICodeInputProps {
 
 function CodeInput({ onCodeChanged }: ICodeInputProps) {
     const [code, setCode] = useState<string>('');
+
     const getCodePart = (index: number) => {
         return code[index] || '';
     };
@@ -15,8 +16,21 @@ function CodeInput({ onCodeChanged }: ICodeInputProps) {
         onCodeChanged(code);
     }, [code, onCodeChanged]);
 
+    const handleKeyboard = (index: number) => (e: KeyboardEvent<HTMLInputElement>) => {
+        const forbidden = /^[e.+-]$/i;
+        if (forbidden.test(e.key)) {
+            e.preventDefault()
+        }
+        if (index > 0 && e.key === 'Backspace'
+            && code && !getCodePart(index)) {
+            const prevInput = document.getElementById(`code-input-${code.length - 1}`) as HTMLInputElement;
+            prevInput.focus();
+        }
+    }
+
     const handleCodeChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
+
         const newCode = code.split('');
         newCode[index] = value;
         setCode(newCode.join(''));
@@ -37,7 +51,9 @@ function CodeInput({ onCodeChanged }: ICodeInputProps) {
             key={index}
             id={`code-input-${index}`}
             value={getCodePart(index)}
+            type="number"
             onChange={handleCodeChange(index)}
+            onKeyDown={handleKeyboard(index)}
             autoComplete='off'
             maxLength={1}/>
     ));
@@ -73,6 +89,17 @@ const InputContainer = styled.div`
     
     font-size: 20px;
     line-height: 24px;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
   }
 `;
 

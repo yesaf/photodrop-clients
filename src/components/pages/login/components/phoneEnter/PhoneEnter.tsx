@@ -5,7 +5,6 @@ import { isValidPhoneNumber } from 'react-phone-number-input';
 import CountryButton from './components/countryButton/CountryButton';
 
 import { FormContainer, FormHeader, StyledPhoneInput, CreateButton } from './PhoneEnter.styles';
-
 interface IPhoneEnterProps {
     onPhoneEntered: (phone: string) => void;
 }
@@ -19,6 +18,11 @@ function PhoneEnter({ onPhoneEntered }: IPhoneEnterProps) {
         }
     };
 
+    const handleEnter = (e: KeyboardEvent) => {
+        if (e.key === 'Enter')
+            handlePhoneEntered();
+    }
+
     return (
         <FormContainer>
             <FormHeader>Let's get started</FormHeader>
@@ -30,6 +34,7 @@ function PhoneEnter({ onPhoneEntered }: IPhoneEnterProps) {
                 addInternationalOption={false}
                 countrySelectComponent={CountryButton}
                 onChange={setPhoneNumber}
+                onKeyDown={handleEnter}
             />
             <CreateButton
                 onClick={handlePhoneEntered}>

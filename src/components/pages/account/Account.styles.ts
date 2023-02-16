@@ -209,7 +209,7 @@ export const AccountImage = styled.img.attrs<IAccountImageProps>(
                 width: isHorizontal ? '100%' : 'auto',
                 height: isHorizontal ? 'auto' : '100%',
                 transform:
-                    `translate(${-shiftX*zoom + (50*zoom - 50)}%, ${-shiftY*zoom*2 + (50*zoom - 50)}%)` +
+                    `translate(${-shiftX*zoom*0.85 + (50*zoom - 50)}%, ${-shiftY*zoom + (50*zoom - 50)}%)` +
                     `scale(${zoom})`,
             }
         };

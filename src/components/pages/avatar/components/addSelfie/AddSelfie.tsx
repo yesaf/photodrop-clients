@@ -1,6 +1,6 @@
 import defaultAvatar from '../../../../../assets/images/default-avatar.svg';
 import { AddButton, SelfieContainer } from './AddSelfie.styles';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, memo } from 'react';
 
 interface IAddSelfieProps {
     onAddSelfie: (image: File) => void;
@@ -30,4 +30,4 @@ function AddSelfie({ onAddSelfie }: IAddSelfieProps) {
     );
 }
 
-export default AddSelfie;
+export default memo(AddSelfie);

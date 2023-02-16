@@ -1,4 +1,4 @@
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import tokenExists from '@/utils/tokenExists';
 
@@ -13,6 +13,7 @@ import { Account } from '@/store/reducers/authReducer';
 
 function ProtectedRoute() {
     const account: Account = useAccount();
+    const location = useLocation();
     const dispatch = useDispatch();
 
     if (!tokenExists()) {
@@ -33,7 +34,7 @@ function ProtectedRoute() {
         return <Navigate to="/auth"/>;
     }
 
-    if (!account.user.selfieId) {
+    if (location.pathname !== '/avatar' && !account.user.selfieId) {
         return <Navigate to="/avatar"/>;
     }
 
