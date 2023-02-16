@@ -2,14 +2,16 @@ import downloadIcon from '@/assets/images/icons/download.svg';
 import shareIcon from '@/assets/images/icons/share.svg';
 import { ActionsContainer } from './Actions.styles';
 import { useCallback } from 'react';
+import albumService from '@/api/services/album';
 
 interface IActionsProps {
     photoUrl: string;
     isLocked: boolean;
+    albumId: string;
 }
 
 
-function Actions({ photoUrl, isLocked }: IActionsProps) {
+function Actions({ photoUrl, isLocked, albumId }: IActionsProps) {
     const handleShare = useCallback(() => {
         if (navigator.share) {
             navigator.share({
@@ -22,10 +24,17 @@ function Actions({ photoUrl, isLocked }: IActionsProps) {
         }
     }, []);
 
+    const handlePay = () => {
+        albumService.payAlbum(albumId)
+            .then((url) => {
+                window.location.replace(url);
+            });
+    };
+
     if (isLocked) {
         return (
             <ActionsContainer className="locked">
-                <button className="unlock-btn">Unlock photo</button>
+                <button className="unlock-btn" onClick={handlePay}>Unlock photo</button>
             </ActionsContainer>
         );
     }

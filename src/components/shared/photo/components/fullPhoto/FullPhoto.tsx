@@ -5,11 +5,12 @@ import Actions from './components/actions/Actions';
 
 interface IFullPhotoProps {
     photoUrl: string;
+    albumId: string;
     onClose: () => void;
     isLocked: boolean;
 }
 
-function FullPhoto({ photoUrl, onClose, isLocked }: IFullPhotoProps) {
+function FullPhoto({ photoUrl, onClose, isLocked, albumId }: IFullPhotoProps) {
     return (
         <Background>
             <Container>
@@ -19,7 +20,7 @@ function FullPhoto({ photoUrl, onClose, isLocked }: IFullPhotoProps) {
                     </svg>
                 </CloseButton>
                 <img src={photoUrl} alt=""/>
-                <Actions isLocked={isLocked} photoUrl={photoUrl}/>
+                <Actions isLocked={isLocked} photoUrl={photoUrl} albumId={albumId}/>
             </Container>
         </Background>
     );

@@ -33,7 +33,6 @@ class AlbumService {
                 return response.data;
             })
             .catch(e => {
-                console.log(e.response);
                 return e.response;
             });
     }
