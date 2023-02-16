@@ -25,9 +25,7 @@ function Album() {
 
     return (
         <>
-            <Header albumName={album.name}
-                    albumDate={album.createdAt}
-                    photosCount={album.photos.length}/>
+            <Header album={album}/>
             <Main albumPhotos={album.photos} isLocked={!album.isUnlocked}/>
             <Footer/>
         </>

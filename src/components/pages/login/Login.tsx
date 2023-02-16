@@ -12,6 +12,7 @@ import tokenExists from '@/utils/tokenExists';
 
 function Login() {
     const [phone, setPhone] = useState<string | undefined>();
+    const [error, setError] = useState<string | undefined>();
     const navigate = useNavigate();
 
     if (tokenExists()) {
@@ -30,13 +31,21 @@ function Login() {
         }
     };
 
+    const resendCode = () => {
+        const phoneData = parsePhoneNumber(phone!);
+        if (phoneData)
+            authService.sendOtp(
+                phoneData.countryCallingCode, phoneData.nationalNumber
+            );
+    }
+
     const handleCodeEntered = (code: string) => {
         const phoneData = parsePhoneNumber(phone as string);
         if (phoneData) {
             authService.verifyOtp(phoneData.countryCallingCode, phoneData.nationalNumber, code)
                 .then((res) => {
                     if (!res.user) {
-                        setPhone(undefined);
+                        setError('Wrong code')
                     } else if (res.user.selfieId) {
                         navigate('/');
                     } else {
@@ -53,7 +62,10 @@ function Login() {
                 !phone ?
                     <PhoneEnter onPhoneEntered={handlePhoneEntered}/> :
                     <>
-                        <CodeEnter phone={phone} onCodeEntered={handleCodeEntered}/>
+                        <CodeEnter phone={phone}
+                                   onCodeEntered={handleCodeEntered}
+                                   resendCode={resendCode}
+                                   error={error}/>
                         <ReturnContainer>
                             <BackButton to="." onClick={() => setPhone(undefined)}/>
                         </ReturnContainer>

@@ -26,7 +26,7 @@ function PaymentSuccess() {
     useEffect(() => {
         if (!album) return;
         const i = new Image();
-        i.src = album.photos[0].url;
+        i.src = album.cover;
         i.onload = () => {
             const ratio = i.width / i.height;
             setCoverStyle({

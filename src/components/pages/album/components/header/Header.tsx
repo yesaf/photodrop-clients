@@ -6,27 +6,26 @@ import { CustomHeader, InfoContainer } from './Header.styles';
 import useIsMobile from '@/components/hooks/useIsMobile';
 import albumService from '@/api/services/album';
 import { useParams } from 'react-router-dom';
+import { IAlbum } from '@/api/types/albumResponses';
 
 interface IHeaderProps {
-    albumName: string;
-    albumDate: string;
-    photosCount: number;
+    album: IAlbum;
 }
 
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-function Header({ albumName, albumDate, photosCount }: IHeaderProps) {
+function Header({ album }: IHeaderProps) {
     const { id } = useParams<{ id: string }>();
     const isMobile = useIsMobile();
 
     const formattedDate = useMemo(() => {
-        const date = new Date(albumDate);
+        const date = new Date(album.createdAt);
         const day = date.getDate();
         const month = date.getMonth();
         const year = date.getFullYear();
 
         return `${monthNames[month]} ${day}, ${year}`;
-    }, [albumDate]);
+    }, [album]);
 
     const handlePay = () => {
         if (id)
@@ -43,11 +42,11 @@ function Header({ albumName, albumDate, photosCount }: IHeaderProps) {
                 <BackButton to="/"/>
             </div>
             <InfoContainer>
-                <h2 className="title">{albumName}</h2>
-                <p className="details">{formattedDate} • <span className="photos">{photosCount} photos</span></p>
+                <h2 className="title">{album.name}</h2>
+                <p className="details">{formattedDate} • <span className="photos">{album.photos.length} photos</span></p>
             </InfoContainer>
             {
-                !isMobile &&
+                !isMobile && !album.isUnlocked &&
                     <button className="unlock-button" onClick={handlePay}>
                         Unlock your photos
                     </button>

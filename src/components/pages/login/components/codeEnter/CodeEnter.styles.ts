@@ -108,4 +108,19 @@ export const FormContainer = styled.div`
       line-height: 28px;
     }
   }
+  
+  .code-error {
+    margin-top: 10px;
+    padding: 5px;
+    width: 300px;
+    
+    text-align: center;
+    color: #D8000C;
+    background-color: #FFBABA;
+    border-radius: 10px;
+    
+    @media (min-width: 1440px) {
+        width: 350px;
+    }
+  }
 `;
