@@ -18,14 +18,21 @@ export const AccountContainer = styled.div`
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
-    line-height: 12px;
     display: flex;
     align-items: center;
+    justify-content: center;
     text-align: center;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 345px;
+    
 
     color: #262626;
 
     @media screen and (min-width: 1440px) {
+      width: 420px;
       font-size: 22px;
     }
   }
@@ -68,13 +75,13 @@ export const SelfieContainer = styled.div`
     height: 100px;
     overflow: hidden;
     box-sizing: content-box;
-    
+
     @media screen and (min-width: 1440px) {
       width: 150px;
       height: 150px;
     }
   }
-  
+
 
 `;
 
@@ -101,7 +108,7 @@ export const EditButton = styled.button`
   #file-input {
     display: none;
   }
-  
+
   & > svg {
     width: var(--size);
     height: var(--size);
@@ -194,9 +201,9 @@ interface IAccountImageProps {
 
 export const AccountImage = styled.img.attrs<IAccountImageProps>(
     ({ selfie }) => {
-        if (!selfie)
-            return {style: {height: '100%', width: '100%'}};
-        console.log(selfie);
+        if (!selfie) {
+            return { style: { height: '100%', width: '100%' } };
+        }
         const { width, height, shiftX, shiftY, zoom } = selfie;
         const isHorizontal = width > height;
 
@@ -206,9 +213,9 @@ export const AccountImage = styled.img.attrs<IAccountImageProps>(
                 height: isHorizontal ? 'auto' : '100%',
                 transformOrigin: '0 0',
                 transform:
-                    `translate(${-shiftX*zoom}%, ${-shiftY*zoom}%)` +
+                    `translate(${-shiftX * zoom}%, ${-shiftY * zoom}%)` +
                     `scale(${zoom})`,
-            }
+            },
         };
 
     })<IAccountImageProps>``;

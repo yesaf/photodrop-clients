@@ -22,7 +22,7 @@ const LoaderContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 1);
   backdrop-filter: blur(4px);
 
   z-index: 1000;

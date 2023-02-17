@@ -9,9 +9,11 @@ import styled from 'styled-components';
 
 import authService from '@/api/services/auth';
 import tokenExists from '@/utils/tokenExists';
+import Loader from '@/components/shared/loader/Loader';
 
 function Login() {
     const [phone, setPhone] = useState<string | undefined>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | undefined>();
     const navigate = useNavigate();
 
@@ -23,9 +25,11 @@ function Login() {
         if (isValidPhoneNumber(phone)) {
             const phoneData = parsePhoneNumber(phone);
             if (phoneData) {
+                setIsLoading(true);
                 authService.sendOtp(phoneData.countryCallingCode, phoneData.nationalNumber)
                     .then(() => {
                         setPhone(phone);
+                        setIsLoading(false);
                     });
             }
         }
@@ -33,6 +37,7 @@ function Login() {
 
     const resendCode = () => {
         const phoneData = parsePhoneNumber(phone!);
+        setError(undefined);
         if (phoneData)
             authService.sendOtp(
                 phoneData.countryCallingCode, phoneData.nationalNumber
@@ -42,10 +47,12 @@ function Login() {
     const handleCodeEntered = (code: string) => {
         const phoneData = parsePhoneNumber(phone as string);
         if (phoneData) {
+            setIsLoading(true)
             authService.verifyOtp(phoneData.countryCallingCode, phoneData.nationalNumber, code)
                 .then((res) => {
                     if (!res.user) {
                         setError('Wrong code')
+                        setIsLoading(false);
                     } else if (res.user.selfieId) {
                         navigate('/');
                     } else {
@@ -55,6 +62,8 @@ function Login() {
         }
 
     };
+
+    if (isLoading) return <Loader/>;
 
     return (
         <>

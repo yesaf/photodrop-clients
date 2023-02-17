@@ -12,9 +12,16 @@ interface ICodEnterProps {
 function CodeEnter({ phone, onCodeEntered, resendCode, error }: ICodEnterProps) {
     const [code, setCode] = useState<string>('');
     const [disableButton, setDisableButton] = useState(true);
+
     const handleCodeChanged = useCallback((code: string) => {
         setCode(code);
         setDisableButton(code.length !== 6);
+    }, []);
+
+    const handleResendCode = useCallback(() => {
+        setCode('');
+        setDisableButton(true);
+        resendCode();
     }, []);
 
     return (
@@ -23,7 +30,7 @@ function CodeEnter({ phone, onCodeEntered, resendCode, error }: ICodEnterProps) 
             <p>Enter the code sent to <b>{phone}</b></p>
             <CodeInput onCodeChanged={handleCodeChanged}/>
             <button className="resend-button"
-                onClick={resendCode}>
+                onClick={handleResendCode}>
                 Resend
             </button>
             <button className="next-button"

@@ -13,6 +13,7 @@ import { setAccountAction } from '@/store/actions/authActions';
 function Avatar() {
     const account = useSelector(accountSelector);
     const [selfie, setSelfie] = useState<File | undefined>();
+    const [isProcessing, setIsProcessing] = useState(false);
     const dispatch = useDispatch();
 
     const handleAddSelfie = useCallback((image: File) => {
@@ -20,6 +21,7 @@ function Avatar() {
     }, [setSelfie]);
 
     const handleDone = useCallback((image: File, croppedArea: Area, zoom: string) => {
+        setIsProcessing(true)
         accountService.updateSelfie(image, croppedArea, zoom)
             .then((res) => {
                 const account = res.data;
@@ -37,6 +39,7 @@ function Avatar() {
             {
                 selfie &&
                 <CropImage initialImage={selfie}
+                           isProcessing={isProcessing}
                            onDone={handleDone}
                            onDiscard={() => {
                                setSelfie(undefined);

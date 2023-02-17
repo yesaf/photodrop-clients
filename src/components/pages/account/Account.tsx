@@ -4,8 +4,10 @@ import arrowRight from '@/assets/images/icons/arrow-right.svg';
 
 import CropImage from '@/components/shared/cropImage/CropImage';
 
-import { AccountContainer, SelfieContainer,
-    EditButton, ActionButton, AccountImage } from './Account.styles';
+import {
+    AccountContainer, SelfieContainer,
+    EditButton, ActionButton, AccountImage,
+} from './Account.styles';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { Area } from 'react-easy-crop';
 
@@ -20,6 +22,7 @@ function Account() {
     const dispatch = useDispatch();
 
     const [isEditAvatar, setIsEditAvatar] = useState(false);
+    const [isSelfieProcessing, setIsSelfieProcessing] = useState(false);
     const [selfie, setSelfie] = useState<File | undefined>();
 
     const handleFileChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -31,19 +34,27 @@ function Account() {
     }, [setSelfie, setIsEditAvatar]);
 
     const handleEditAvatarDone = (image: File, croppedArea: Area, zoom: string) => {
+        setIsSelfieProcessing(true);
         accountService.updateSelfie(image, croppedArea, zoom)
             .then((res) => {
                 const accountData = res.data;
                 dispatch(setAccountAction({ isLoaded: true, ...accountData }));
                 setSelfie(undefined);
                 setIsEditAvatar(false);
+                setIsSelfieProcessing(false);
             });
-    }
+    };
 
     return (
         <AccountContainer>
-            <header>Welcome, {account.user?.fullName ? account.user?.fullName : 'user'}.</header>
-            <SelfieContainer >
+            <header>
+                {
+                    account.user?.fullName ?
+                        `Welcome, ${account.user?.fullName}.` :
+                        'Welcome to Photodrop.'
+                }
+            </header>
+            <SelfieContainer>
                 <span>Your selfie</span>
                 <div className="image-container">
                     <AccountImage
@@ -63,6 +74,7 @@ function Account() {
                 {
                     isEditAvatar && selfie &&
                     <CropImage initialImage={selfie}
+                               isProcessing={isSelfieProcessing}
                                onDone={handleEditAvatarDone}
                                onDiscard={() => setIsEditAvatar(false)}/>
                 }
@@ -85,7 +97,6 @@ function Account() {
         </AccountContainer>
     );
 }
-
 
 
 export default Account;

@@ -2,14 +2,16 @@ import Cropper, { Area } from 'react-easy-crop';
 import { useState, useCallback, useEffect } from 'react';
 import closeIcon from '@/assets/images/icons/close.svg';
 import { Background, Container, ActionsContainer, CropContainer, CropHeader } from './CropImage.styles';
+import DotsAnimation from './components/dotsAnimation/DotsAnimation';
 
 interface CropImageProps {
     initialImage: File;
     onDone: (image: File, croppedArea: Area, zoom: string) => void;
     onDiscard: () => void;
+    isProcessing: boolean;
 }
 
-function CropImage({ initialImage, onDone, onDiscard }: CropImageProps) {
+function CropImage({ initialImage, onDone, onDiscard, isProcessing }: CropImageProps) {
     const [image, setImage] = useState<File>(initialImage);
     const [imageSrc, setImageSrc] = useState<string | undefined>();
     const [coverType, setCoverType] = useState<'vertical-cover' | 'horizontal-cover' | undefined>();
@@ -90,7 +92,15 @@ function CropImage({ initialImage, onDone, onDiscard }: CropImageProps) {
                     <input id="retake-input" type="file"
                            accept="image/*" onChange={handleSelfieChange}/>
                     <button className="retake" onClick={handleRetake}>Retake</button>
-                    <button className="save" onClick={() => onDone(image, croppedArea!, `${zoom}`)}>Done</button>
+                    <button className="save"
+                            disabled={isProcessing}
+                            onClick={() => onDone(image, croppedArea!, `${zoom}`)}>
+                        {
+                            isProcessing ?
+                                <DotsAnimation/> :
+                                'Save'
+                        }
+                    </button>
                 </ActionsContainer>
             </Container>
         </Background>

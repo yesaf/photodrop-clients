@@ -140,6 +140,10 @@ export const ActionsContainer = styled.div`
     font-weight: 500;
     font-size: 18px;
     line-height: 23px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &.retake {
       border: 1px solid #FFFFFF;
@@ -155,10 +159,11 @@ export const ActionsContainer = styled.div`
       background-color: #FFFFFF;
       color: #262626;
 
-      &:hover {
+      &:not(:disabled):hover {
         opacity: 0.5;
-
       }
+      
+      
     }
   }
 
